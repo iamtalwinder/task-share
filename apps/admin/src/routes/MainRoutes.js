@@ -3,6 +3,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 
 const TaskDefault = Loadable(lazy(() => import('pages/tasks/tasks')));
+const AddTaskDefault = Loadable(lazy(() => import('components/add-task/add-task')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -23,6 +24,10 @@ const MainRoutes = {
         }
       ]
     },
+    {
+      path: 'add-task',
+      element: <AddTaskDefault />
+    }
   ]
 };
 

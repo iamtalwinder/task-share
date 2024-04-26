@@ -1,0 +1,35 @@
+.new-task {
+  display: flex;
+  justify-content: space-between;
+
+  &__title {
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  &__cancel-btn {
+    margin-right: 10px;
+    text-decoration: none;
+  }
+
+  &__add-btn {
+    background-color: green !important;
+
+    :hover {
+      background-color: green !important;
+    }
+  }
+}
+
+.card {
+  margin: auto;
+  margin-top: 20px;
+
+  &__chip-input {
+    width: 100%;
+  }
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}

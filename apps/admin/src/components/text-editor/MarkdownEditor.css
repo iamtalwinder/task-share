@@ -1,0 +1,33 @@
+.markdown-editor {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  height: 100vh;
+}
+
+.textarea-container {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.textarea-container textarea {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+.preview {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.preview-content {
+  height: 100%;
+}

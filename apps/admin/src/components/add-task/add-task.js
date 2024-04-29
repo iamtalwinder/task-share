@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Grid, Card, Box, CardContent, Typography, TextField } from '@mui/material';
+import { Button, Grid, Card, Box, CardContent, Typography, TextField, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
 import './addTask.scss';
+import MarkdownEditor from 'components/text-editor/TextEditor';
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -85,6 +86,11 @@ const AddTask = () => {
               </Grid>
             </Grid>
           </form>
+          <Divider className='card__divider' />
+          <Box>
+            <Typography sx={{ fontSize: 24 }}>Description</Typography>
+            <MarkdownEditor />
+          </Box>
         </CardContent>
       </Card>
     </Box>

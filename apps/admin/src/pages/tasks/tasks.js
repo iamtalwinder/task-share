@@ -16,7 +16,7 @@ import {
   Chip
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Addtask from 'components/add-task/add-task';
+import Addtask from 'pages/add-task/AddTask';
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -24,7 +24,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
-import './tasks.scss';
+import './Tasks.scss';
 
 function createData(title, status) {
   return { title, status };

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
-import './addTask.scss';
+import './AddTask.scss';
 import MarkdownEditor from 'components/text-editor/TextEditor';
 
 const AddTask = () => {

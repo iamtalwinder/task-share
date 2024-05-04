@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
-import './AddTask.scss';
 import MarkdownEditor from 'components/text-editor/TextEditor';
+import { useParams } from 'react-router-dom';
+import './AddTask.scss';
 
 const AddTask = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
@@ -36,7 +38,7 @@ const AddTask = () => {
         <CardContent>
           <Box className='new-task'>
             <Typography variant="h5" component="div" className='new-task__title'>
-              Add New Task
+              {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
               <Button variant="contained"
@@ -50,7 +52,7 @@ const AddTask = () => {
                 onClick={formik.handleSubmit}
                 className='new-task__add-btn'
               >
-                Add Task
+                {id ? 'Edit Task' : 'Add Task'}
               </Button>
             </Box>
           </Box>
@@ -68,7 +70,7 @@ const AddTask = () => {
                   label="Title"
                   variant="outlined"
                   placeholder="Enter Title"
-                  value={formik.values.title}
+                  value={id ? 'Create todo list' : formik.values.title}
                   onChange={formik.handleChange}
                   error={formik.touched.title && Boolean(formik.errors.title)}
                   helperText={formik.touched.title && formik.errors.title}
@@ -76,7 +78,7 @@ const AddTask = () => {
               </Grid>
               <Grid item xs={12}>
                 <MuiChipsInput
-                  value={formik.values.tags}
+                  value={id ?  ['React', 'Typescript'] : formik.values.tags}
                   onChange={(tags) => formik.setFieldValue('tags', tags)}
                   placeholder='Type tags you want to add'
                   error={formik.touched.tags && Boolean(formik.errors.tags)}

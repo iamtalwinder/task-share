@@ -25,7 +25,11 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'add-task',
+      path: '/task/add',
+      element: <AddTaskDefault />
+    },
+    {
+      path: '/task/:id/edit',
       element: <AddTaskDefault />
     }
   ]

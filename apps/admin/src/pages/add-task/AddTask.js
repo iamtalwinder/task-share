@@ -19,7 +19,7 @@ const AddTask = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: '',
+      title: '', 
       tags: [],
     },
     validationSchema: validationSchema,
@@ -28,9 +28,18 @@ const AddTask = () => {
     },
   });
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     navigate('/');
   }
+
+  React.useEffect(() => {
+    if (id) {
+      formik.setValues({
+        title: 'Create todo list',
+        tags: ['React', 'TypeScript'],
+      });
+    }
+  }, [id]);
 
   return (
     <Box>
@@ -43,7 +52,7 @@ const AddTask = () => {
             <Box>
               <Button variant="contained"
                 color="error"
-                onClick={handleCancle}
+                onClick={handleCancel}
                 className='new-task__cancel-btn'
               >
                 Cancel
@@ -70,7 +79,7 @@ const AddTask = () => {
                   label="Title"
                   variant="outlined"
                   placeholder="Enter Title"
-                  value={id ? 'Create todo list' : formik.values.title}
+                  value={formik.values.title}
                   onChange={formik.handleChange}
                   error={formik.touched.title && Boolean(formik.errors.title)}
                   helperText={formik.touched.title && formik.errors.title}
@@ -78,7 +87,7 @@ const AddTask = () => {
               </Grid>
               <Grid item xs={12}>
                 <MuiChipsInput
-                  value={id ?  ['React', 'Typescript'] : formik.values.tags}
+                  value={formik.values.tags}
                   onChange={(tags) => formik.setFieldValue('tags', tags)}
                   placeholder='Type tags you want to add'
                   error={formik.touched.tags && Boolean(formik.errors.tags)}

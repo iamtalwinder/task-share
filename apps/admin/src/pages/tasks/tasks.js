@@ -103,7 +103,7 @@ const TaskTable = () => {
                   <Button className='table__action-button' onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
-                  <Button className='table__action-button'>
+                  <Button className='table__action-button' onClick={handleViewTask}>
                     <RemoveRedEyeIcon />
                   </Button>
                   <Button className='table__action-button'>

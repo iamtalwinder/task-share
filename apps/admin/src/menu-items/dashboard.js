@@ -1,22 +1,32 @@
-import { IconDashboard } from '@tabler/icons-react';
-
-const icons = { IconDashboard };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
-const dashboard = {
-  id: 'dashboard',
+const tasks = {
+  id: 'tasks',
   type: 'group',
   children: [
     {
       id: 'default',
-      title: 'Dashboard',
+      title: 'Tasks',
       type: 'item',
-      url: '/dashboard',
-      icon: icons.IconDashboard,
+      url: '/',
+      breadcrumbs: false
+    },
+    {
+      id: 'tests',
+      title: 'Tests',
+      type: 'item',
+      url: '/tests',
+      breadcrumbs: false
+    },
+    {
+      id: 'link',
+      title: 'Generated URL',
+      type: 'item',
+      url: '/generated-url',
       breadcrumbs: false
     }
   ]
-};
+}
 
-export default dashboard;
+export default tasks;

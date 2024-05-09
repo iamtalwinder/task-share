@@ -1,7 +1,7 @@
-import dashboard from './dashboard';
+import tasks from './dashboard';
 
 const menuItems = {
-  items: [dashboard]
+  items: [tasks]
 };
 
 export default menuItems;

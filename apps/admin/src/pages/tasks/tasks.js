@@ -16,7 +16,6 @@ import {
   Chip
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Addtask from 'pages/add-task/AddTask';
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -26,17 +25,16 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
 import './Tasks.scss';
 
-function createData(title, status) {
-  return { title, status };
+function createData(id, title, status) {
+  return { id, title, status };
 }
 
 const rows = [
-  createData('Create todo list', "used"),
-  createData('Create user form using redux', "not used"),
+  createData('1','Create todo list', "used"),
+  createData('2','Create user form using redux', "not used"),
 ];
 
 const TaskTable = () => {
-  const [isAddFormVisible, setIsAddFormVisible] = React.useState(false);
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -51,13 +49,16 @@ const TaskTable = () => {
   };
 
   const handleAddButtonClick = () => {
-    setIsAddFormVisible(true);
-    navigate('/add-task')
+    navigate('/task/add')
   };
 
   const handleGenerateLink = () => {
     setIsGenerateLink(true);
   };
+
+  const handleEdit = (data) => {
+    navigate(`/task/${data.id}/edit`)
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -74,8 +75,6 @@ const TaskTable = () => {
         </CardContent>
       </Card>
 
-      {isAddFormVisible && <Addtask />}
-
       <TableContainer component={Paper} className='table'>
         <Table aria-label='simple table' className='table__wrapper'>
           <TableHead>
@@ -89,7 +88,7 @@ const TaskTable = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow
-                key={row.title}
+                key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell align="center">{row.title}</TableCell>
@@ -101,7 +100,7 @@ const TaskTable = () => {
                   <Chip label={row.status} className='table__chip' />
                 </TableCell>
                 <TableCell align="center">
-                  <Button className='table__action-button'>
+                  <Button className='table__action-button' onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
                   <Button className='table__action-button'>

@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
-import './AddTask.scss';
 import MarkdownEditor from 'components/text-editor/TextEditor';
+import { useParams } from 'react-router-dom';
+import './AddTask.scss';
 
 const AddTask = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
@@ -17,7 +19,7 @@ const AddTask = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: '',
+      title: '', 
       tags: [],
     },
     validationSchema: validationSchema,
@@ -26,9 +28,18 @@ const AddTask = () => {
     },
   });
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     navigate('/');
   }
+
+  React.useEffect(() => {
+    if (id) {
+      formik.setValues({
+        title: 'Create todo list',
+        tags: ['React', 'TypeScript'],
+      });
+    }
+  }, [id]);
 
   return (
     <Box>
@@ -36,12 +47,12 @@ const AddTask = () => {
         <CardContent>
           <Box className='new-task'>
             <Typography variant="h5" component="div" className='new-task__title'>
-              Add New Task
+              {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
               <Button variant="contained"
                 color="error"
-                onClick={handleCancle}
+                onClick={handleCancel}
                 className='new-task__cancel-btn'
               >
                 Cancel
@@ -50,7 +61,7 @@ const AddTask = () => {
                 onClick={formik.handleSubmit}
                 className='new-task__add-btn'
               >
-                Add Task
+                {id ? 'Edit Task' : 'Add Task'}
               </Button>
             </Box>
           </Box>

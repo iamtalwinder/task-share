@@ -4,6 +4,7 @@ import Loadable from 'ui-component/Loadable';
 
 const TaskDefault = Loadable(lazy(() => import('pages/tasks/tasks')));
 const AddTaskDefault = Loadable(lazy(() => import('pages/add-task/AddTask')));
+const ViewTask = Loadable(lazy(() => import('pages/view-task/ViewTask')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -31,6 +32,10 @@ const MainRoutes = {
     {
       path: '/task/:id/edit',
       element: <AddTaskDefault />
+    },
+    {
+      path: '/task/view',
+      element: <ViewTask />
     }
   ]
 };

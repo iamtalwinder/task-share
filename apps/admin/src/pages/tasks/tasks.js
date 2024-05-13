@@ -60,6 +60,10 @@ const TaskTable = () => {
     navigate(`/task/${data.id}/edit`)
   }
 
+  const handleViewTask = () => {
+    navigate('/task/view');
+  }
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 

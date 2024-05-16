@@ -30,9 +30,8 @@ function createData(id, title, usedIn) {
 }
 
 const rows = [
-  createData('1', 'Todo list Test', "todo"),
-  createData('2', 'User form using redux Test', "user form"),
-  createData('2', 'Snackbar', "snackbar"),
+  createData('1', 'Todo list', "Create todo list"),
+  createData('2', 'Mui Snackbar', "Create Snackbar with mui"),
 ];
 
 const TestsList = () => {
@@ -58,7 +57,7 @@ const TestsList = () => {
   };
 
   const handleEdit = (data) => {
-    navigate(`/task/${data.id}/edit`)
+    navigate(`/test/${data.id}/edit`)
   }
 
   const handleViewTask = () => {
@@ -73,7 +72,7 @@ const TestsList = () => {
       <Card className='card'>
         <CardContent>
           <Button variant='outlined' onClick={handleAddButtonClick}
-            className='card__add-new-task'>
+            className='card__add-new-test'>
             <AddIcon className='card__add-icon' />
             Add New Test
           </Button>

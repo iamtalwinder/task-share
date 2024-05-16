@@ -13,13 +13,13 @@ const AddTest = () => {
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    tags: yup.array().min(1, 'At least one tag is required'),
+    task: yup.array().min(1, 'At least one task is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      tags: [],
+      task: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -28,14 +28,14 @@ const AddTest = () => {
   });
 
   const handleCancel = () => {
-    navigate('/');
+    navigate('/tests');
   }
 
   React.useEffect(() => {
     if (id) {
       formik.setValues({
-        title: 'Create todo list',
-        tags: ['React', 'TypeScript'],
+        title: 'Todo List',
+        task: ['Create todo list', '', 'Snackbar with mui'],
       });
     }
   }, [id]);

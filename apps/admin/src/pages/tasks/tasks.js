@@ -32,6 +32,7 @@ function createData(id, title, status) {
 const rows = [
   createData('1','Create todo list', "used"),
   createData('2','Create user form using redux', "not used"),
+  createData('3','Create Snackbar with mui', "used"),
 ];
 
 const TaskTable = () => {
@@ -98,7 +99,8 @@ const TaskTable = () => {
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
                   <Chip label="React" className='table__chip' />
-                  <Chip label="TypeScript" />
+                  <Chip label="TypeScript" className='table__chip' />
+                  <Chip label="Redux Toolkit" />
                 </TableCell>
                 <TableCell align="center">
                   <Chip label={row.status} className='table__chip' />

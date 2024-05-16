@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Button, OutlinedInput, MenuItem, FormControl, Select, Chip } from '@mui/material';
+import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography } from '@mui/material';
 import { Container, Draggable } from "react-smooth-dnd";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 import List from "@material-ui/core/List";
@@ -11,7 +11,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DragHandleIcon from "@material-ui/icons/DragHandle";
 
 const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+const ITEM_PADDING_TOP = 20;
 const MenuProps = {
   PaperProps: {
     style: {
@@ -41,7 +41,6 @@ function getStyles(name, taskName, theme) {
 const MultipleTaskSelect = () => {
   const theme = useTheme();
   const [selectedItems, setSelectedItems] = React.useState([]);
-  const [isSelectTask, setIsSelectTask] = React.useState(false);
 
   const handleChange = (event) => {
     const {
@@ -55,61 +54,55 @@ const MultipleTaskSelect = () => {
     setSelectedItems(arrayMove(selectedItems, removedIndex, addedIndex));
   };
 
-  const handleSelectTask = () => {
-    setIsSelectTask(true);
-  }
 
   return (
     <Box>
-      <Button variant='contained' onClick={handleSelectTask}>Add Task</Button>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        {isSelectTask ? (
-          <Select
-            label='Select Task'
-            labelId="demo-multiple-chip-label"
-            id="demo-multiple-chip"
-            multiple
-            value={selectedItems.map((item) => item.id)}
-            onChange={handleChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Select Task" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
-            MenuProps={MenuProps}
-          >
-            {names.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, selectedItems.map((item) => item.id), theme)}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        ) : null}
-        {isSelectTask ? (
-          <List>
-            <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}>
-              {selectedItems.map(({ id, text }) => (
-                <Draggable key={id}>
-                  <ListItem>
-                    <ListItemText primary={text} />
-                    <ListItemSecondaryAction>
-                      <ListItemIcon className="drag-handle">
-                        <DragHandleIcon />
-                      </ListItemIcon>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                </Draggable>
+      <Typography sx={{ marginBottom: '15px' }}>Select task from the below list</Typography>
+      <FormControl sx={{ width: 300 }}>
+        <InputLabel id="select-task-label">Select Task</InputLabel>
+        <Select
+          label='Select Task'
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={selectedItems.map((item) => item.id)}
+          onChange={handleChange}
+          // input={<OutlinedInput id="select-multiple-chip" label="Select Task" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
               ))}
-            </Container>
-          </List>
-        ) : null}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, selectedItems.map((item) => item.id), theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+        <List sx={{ ITEM_PADDING_TOP }}>
+          <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}>
+            {selectedItems.map(({ id, text }) => (
+              <Draggable key={id}>
+                <ListItem>
+                  <ListItemText primary={text} />
+                  <ListItemSecondaryAction>
+                    <ListItemIcon className="drag-handle">
+                      <DragHandleIcon />
+                    </ListItemIcon>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </Draggable>
+            ))}
+          </Container>
+        </List>
       </FormControl>
     </Box>
   );

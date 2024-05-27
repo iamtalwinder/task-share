@@ -61,7 +61,7 @@ const TestsList = () => {
   }
 
   const handleViewTask = () => {
-    navigate('/task/view');
+    navigate('/tests');
   }
 
   const open = Boolean(anchorEl);

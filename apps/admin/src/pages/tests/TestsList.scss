@@ -1,0 +1,43 @@
+.card {
+  width: 100%;
+  margin-bottom: 10px;
+
+  &__add-new-test {
+    text-decoration: none;
+  }
+
+  &__add-icon {
+    margin-right: 1px;
+  }
+}
+
+.table {
+  &__wrapper {
+    min-width: 650px;
+  }
+
+  &__chip {
+    margin-right: 5px;
+  }
+
+  &__action-button {
+    padding: 0;
+    min-width: 44px;
+  }
+}
+
+.paper {
+  max-height: 100vh;
+  width: 150px;
+  padding: 2px;
+  text-align: center;
+
+  &__extra-actions {
+    display: flex;
+    background-color: white !important;
+  }
+
+  &__extra-icon {
+    margin-right: 5px;
+  }
+}

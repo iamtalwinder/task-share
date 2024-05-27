@@ -5,6 +5,8 @@ import Loadable from 'ui-component/Loadable';
 const TaskDefault = Loadable(lazy(() => import('pages/tasks/tasks')));
 const AddTaskDefault = Loadable(lazy(() => import('pages/add-task/AddTask')));
 const ViewTask = Loadable(lazy(() => import('pages/view-task/ViewTask')));
+const TestList = Loadable(lazy(() => import('pages/tests/TestsList')));
+const AddTest = Loadable(lazy(() => import('pages/add-test/AddTest')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -16,15 +18,15 @@ const MainRoutes = {
       path: '/',
       element: <TaskDefault />
     },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'default',
-          element: <TaskDefault />
-        }
-      ]
-    },
+    // {
+    //   path: 'dashboard',
+    //   children: [
+    //     {
+    //       path: 'default',
+    //       element: <TaskDefault />
+    //     }
+    //   ]
+    // },
     {
       path: '/task/add',
       element: <AddTaskDefault />
@@ -36,7 +38,19 @@ const MainRoutes = {
     {
       path: '/task/view',
       element: <ViewTask />
-    }
+    },
+    {
+      path: '/tests',
+      element: <TestList />
+    },
+    {
+      path: '/test/add',
+      element: <AddTest />
+    },
+    {
+      path: '/test/:id/edit',
+      element: <AddTest />
+    },
   ]
 };
 

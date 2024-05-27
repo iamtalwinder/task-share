@@ -23,19 +23,18 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
-import './Tasks.scss';
+import './TestsList.scss';
 
-function createData(id, title, status) {
-  return { id, title, status };
+function createData(id, title, usedIn) {
+  return { id, title, usedIn };
 }
 
 const rows = [
-  createData('1','Create todo list', "used"),
-  createData('2','Create user form using redux', "not used"),
-  createData('3','Create Snackbar with mui', "used"),
+  createData('1', 'Todo list', "Create todo list"),
+  createData('2', 'Mui Snackbar', "Create Snackbar with mui"),
 ];
 
-const TaskTable = () => {
+const TestsList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ const TaskTable = () => {
   };
 
   const handleAddButtonClick = () => {
-    navigate('/task/add')
+    navigate('/test/add')
   };
 
   const handleGenerateLink = () => {
@@ -58,11 +57,11 @@ const TaskTable = () => {
   };
 
   const handleEdit = (data) => {
-    navigate(`/task/${data.id}/edit`)
+    navigate(`/test/${data.id}/edit`)
   }
 
   const handleViewTask = () => {
-    navigate('/task/view');
+    navigate('/tests');
   }
 
   const open = Boolean(anchorEl);
@@ -73,9 +72,9 @@ const TaskTable = () => {
       <Card className='card'>
         <CardContent>
           <Button variant='outlined' onClick={handleAddButtonClick}
-            className='card__add-new-task'>
+            className='card__add-new-test'>
             <AddIcon className='card__add-icon' />
-            Add New Task
+            Add New Test
           </Button>
         </CardContent>
       </Card>
@@ -85,8 +84,7 @@ const TaskTable = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center">Title</TableCell>
-              <TableCell align="center">Tags</TableCell>
-              <TableCell align="center">Status</TableCell>
+              <TableCell align="center">Task Used</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -98,12 +96,7 @@ const TaskTable = () => {
               >
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
-                  <Chip label="React" className='table__chip' />
-                  <Chip label="TypeScript" className='table__chip' />
-                  <Chip label="Redux Toolkit" />
-                </TableCell>
-                <TableCell align="center">
-                  <Chip label={row.status} className='table__chip' />
+                  <Chip label={row.usedIn} className='table__chip' />
                 </TableCell>
                 <TableCell align="center">
                   <Button className='table__action-button' onClick={() => handleEdit(row)}>
@@ -151,4 +144,4 @@ const TaskTable = () => {
   );
 };
 
-export default TaskTable;
+export default TestsList;

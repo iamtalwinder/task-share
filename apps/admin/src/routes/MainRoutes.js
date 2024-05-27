@@ -15,7 +15,8 @@ const MainRoutes = {
   element: <MainLayout />,
   children: [
     {
-      path: '/',
+      path: '/tasks',
+      default: true,
       element: <TaskDefault />
     },
     // {

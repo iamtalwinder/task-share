@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography } from '@mui/material';
+import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography, Divider } from '@mui/material';
 import { Container, Draggable } from "react-smooth-dnd";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 import List from "@material-ui/core/List";
@@ -78,13 +78,16 @@ const MultipleTaskSelect = () => {
           MenuProps={MenuProps}
         >
           {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, selectedItems.map((item) => item.id), theme)}
-            >
-              {name}
-            </MenuItem>
+            <>
+              <MenuItem
+                key={name}
+                value={name}
+                style={getStyles(name, selectedItems.map((item) => item.id), theme)}
+              >
+                {name}
+              </MenuItem>
+              <Divider />
+            </>
           ))}
         </Select>
         <List sx={{ ITEM_PADDING_TOP }}>

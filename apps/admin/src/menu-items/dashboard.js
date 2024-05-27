@@ -6,10 +6,10 @@ const tasks = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'tasks',
       title: 'Tasks',
       type: 'item',
-      url: '/',
+      url: '/tasks',
       breadcrumbs: false
     },
     {
@@ -17,13 +17,6 @@ const tasks = {
       title: 'Tests',
       type: 'item',
       url: '/tests',
-      breadcrumbs: false
-    },
-    {
-      id: 'link',
-      title: 'Generated URL',
-      type: 'item',
-      url: '/generated-url',
       breadcrumbs: false
     }
   ]

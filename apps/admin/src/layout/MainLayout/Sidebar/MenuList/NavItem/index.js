@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { forwardRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import pluralize from 'pluralize';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -58,8 +59,9 @@ const NavItem = ({ item, level }) => {
     const currentIndex = document.location.pathname
       .toString()
       .split('/')
-      .findIndex((id) => id === item.id);
-    if (currentIndex > -1) {
+      .findIndex((id) => id === item.id || pluralize(id) === item.id);
+
+      if (currentIndex > -1) {
       dispatch({ type: MENU_OPEN, id: item.id });
     }
     // eslint-disable-next-line

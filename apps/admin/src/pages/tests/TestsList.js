@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
@@ -60,10 +59,6 @@ const TestsList = () => {
     navigate(`/test/${data.id}/edit`)
   }
 
-  const handleViewTask = () => {
-    navigate('/tests');
-  }
-
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
@@ -101,9 +96,6 @@ const TestsList = () => {
                 <TableCell align="center">
                   <Button className='table__action-button' onClick={() => handleEdit(row)}>
                     <EditIcon />
-                  </Button>
-                  <Button className='table__action-button' onClick={handleViewTask}>
-                    <RemoveRedEyeIcon />
                   </Button>
                   <Button className='table__action-button'>
                     <DeleteIcon />

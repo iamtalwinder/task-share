@@ -29,7 +29,7 @@ const AddTask = () => {
   });
 
   const handleCancel = () => {
-    navigate('/');
+    navigate('/tasks');
   }
 
   React.useEffect(() => {

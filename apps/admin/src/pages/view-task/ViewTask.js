@@ -9,7 +9,7 @@ const ViewTask = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/');
+    navigate('/tasks');
   }
 
   return (

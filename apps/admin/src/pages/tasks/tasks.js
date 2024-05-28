@@ -30,9 +30,9 @@ function createData(id, title, status) {
 }
 
 const rows = [
-  createData('1','Create todo list', "used"),
-  createData('2','Create user form using redux', "not used"),
-  createData('3','Create Snackbar with mui', "used"),
+  createData('1', 'Create todo list', "used"),
+  createData('2', 'Create user form using redux', "not used"),
+  createData('3', 'Create Snackbar with mui', "used"),
 ];
 
 const TaskTable = () => {
@@ -61,8 +61,8 @@ const TaskTable = () => {
     navigate(`/task/${data.id}/edit`)
   }
 
-  const handleViewTask = () => {
-    navigate('/task/view');
+  const handleViewTask = (data) => {
+    navigate(`/task/${data.id}/view`);
   }
 
   const open = Boolean(anchorEl);
@@ -109,7 +109,7 @@ const TaskTable = () => {
                   <Button className='table__action-button' onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
-                  <Button className='table__action-button' onClick={handleViewTask}>
+                  <Button className='table__action-button' onClick={() => handleViewTask(row)}>
                     <RemoveRedEyeIcon />
                   </Button>
                   <Button className='table__action-button'>

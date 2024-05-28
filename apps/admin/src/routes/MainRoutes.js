@@ -37,7 +37,7 @@ const MainRoutes = {
       element: <AddTaskDefault />
     },
     {
-      path: '/task/view',
+      path: '/task/:id/view',
       element: <ViewTask />
     },
     {

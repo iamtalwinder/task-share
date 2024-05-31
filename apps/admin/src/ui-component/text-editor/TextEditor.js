@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import './MarkdownEditor.css';
 import data from '../../constants/markdown-data';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './MarkdownEditor.module.scss';
+
+const sn = styleNames(styles);
 
 const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState(data);
@@ -11,16 +16,17 @@ const MarkdownEditor = () => {
   };
 
   return (
-    <div className="markdown-editor">
-      <div className="textarea-container">
+    <div className={sn('editor')}>
+      <div className={sn('editor__textarea')}>
         <textarea
           value={markdown}
           onChange={handleMarkdownChange}
-          placeholder="Enter Markdown here..."
+          placeholder='Enter Markdown here...'
+          className={sn('editor__textarea-content')}
         />
       </div>
-      <div className="preview">
-        <div className="preview-content">
+      <div className={sn('editor__preview')}>
+        <div className={sn('editor__preview-content')}>
           <ReactMarkdown>{markdown}</ReactMarkdown>
         </div>
       </div>
@@ -28,4 +34,4 @@ const MarkdownEditor = () => {
   );
 };
 
-export default MarkdownEditor;
+export default withErrorBoundary(MarkdownEditor);

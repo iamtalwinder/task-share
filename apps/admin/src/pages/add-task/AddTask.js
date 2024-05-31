@@ -6,7 +6,11 @@ import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
 import MarkdownEditor from 'ui-component/text-editor/TextEditor';
 import { useParams } from 'react-router-dom';
-import './AddTask.scss';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+import styles from './AddTask.module.scss';
+
+const sn = styleNames(styles);
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -19,7 +23,7 @@ const AddTask = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: '', 
+      title: '',
       tags: [],
     },
     validationSchema: validationSchema,
@@ -45,21 +49,21 @@ const AddTask = () => {
     <Box>
       <Card>
         <CardContent>
-          <Box className='new-task'>
-            <Typography variant="h5" component="div" className='new-task__title'>
+          <Box className={sn('new-task')}>
+            <Typography variant="h5" component="div" className={sn('new-task__title')}>
               {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
               <Button variant="contained"
                 color="error"
                 onClick={handleCancel}
-                className='new-task__cancel-btn'
+                className={sn('new-task__cancel-btn')}
               >
                 Cancel
               </Button>
               <Button variant="contained"
                 onClick={formik.handleSubmit}
-                className='new-task__add-btn'
+                className={sn('new-task__add-btn')}
               >
                 {id ? 'Edit Task' : 'Add Task'}
               </Button>
@@ -67,7 +71,7 @@ const AddTask = () => {
           </Box>
         </CardContent>
       </Card>
-      <Card className='card'>
+      <Card className={sn('card')}>
         <CardContent>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2} alignItems="center">
@@ -92,12 +96,12 @@ const AddTask = () => {
                   placeholder='Type tags you want to add'
                   error={formik.touched.tags && Boolean(formik.errors.tags)}
                   helperText={formik.touched.tags && formik.errors.tags}
-                  className='card__chip-input'
+                  className={sn('card__chip-input')}
                 />
               </Grid>
             </Grid>
           </form>
-          <Divider className='card__divider' />
+          <Divider className={sn('card__divider')} />
           <Box>
             <Typography sx={{ fontSize: 24 }}>Description</Typography>
             <MarkdownEditor />
@@ -108,4 +112,4 @@ const AddTask = () => {
   );
 };
 
-export default AddTask;
+export default withErrorBoundary(AddTask);

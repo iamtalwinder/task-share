@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography, Divider } from '@mui/material';
+import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography } from '@mui/material';
 import { Container, Draggable } from "react-smooth-dnd";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 import List from "@material-ui/core/List";
@@ -9,6 +9,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DragHandleIcon from "@material-ui/icons/DragHandle";
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './SelectTask.module.scss';
+
+const sn = styleNames(styles);
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 20;
@@ -54,11 +60,10 @@ const MultipleTaskSelect = () => {
     setSelectedItems(arrayMove(selectedItems, removedIndex, addedIndex));
   };
 
-
   return (
     <Box>
-      <Typography sx={{ marginBottom: '15px' }}>Select task from the below list</Typography>
-      <FormControl sx={{ width: 300 }}>
+      <Typography className={sn('input__label')}>Select task from the below list</Typography>
+      <FormControl className={sn('form')}>
         <InputLabel id="select-task-label">Select Task</InputLabel>
         <Select
           label='Select Task'
@@ -67,9 +72,8 @@ const MultipleTaskSelect = () => {
           multiple
           value={selectedItems.map((item) => item.id)}
           onChange={handleChange}
-          // input={<OutlinedInput id="select-multiple-chip" label="Select Task" />}
           renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box className={sn('form__selected-task')}>
               {selected.map((value) => (
                 <Chip key={value} label={value} />
               ))}
@@ -78,16 +82,13 @@ const MultipleTaskSelect = () => {
           MenuProps={MenuProps}
         >
           {names.map((name) => (
-            <>
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, selectedItems.map((item) => item.id), theme)}
-              >
-                {name}
-              </MenuItem>
-              <Divider />
-            </>
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, selectedItems.map((item) => item.id), theme)}
+            >
+              {name}
+            </MenuItem>
           ))}
         </Select>
         <List sx={{ ITEM_PADDING_TOP }}>
@@ -111,4 +112,4 @@ const MultipleTaskSelect = () => {
   );
 }
 
-export default MultipleTaskSelect;
+export default withErrorBoundary(MultipleTaskSelect);

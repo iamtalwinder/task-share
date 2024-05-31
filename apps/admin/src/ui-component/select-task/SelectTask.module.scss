@@ -1,0 +1,13 @@
+.input__label {
+  margin-bottom: '15px';
+}
+
+.form {
+  width: 100%;
+
+  &__selected-task {
+    display: 'flex';
+    flex-wrap: 'wrap';
+    gap: 0.5;
+  }
+}

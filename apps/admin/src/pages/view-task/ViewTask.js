@@ -3,7 +3,12 @@ import { Box, Card, CardContent, Typography, Chip, Button, Divider } from '@mui/
 import { useNavigate } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import TASK_DESCRIPTION from '../../constants/markdown-data';
-import './ViewTask.scss';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './ViewTask.module.scss';
+
+const sn = styleNames(styles);
 
 const ViewTask = () => {
   const navigate = useNavigate();
@@ -14,34 +19,34 @@ const ViewTask = () => {
 
   return (
     <Box>
-      <Card className='card'>
-        <CardContent className='content'>
-          <Box className='content__task-title-container'>
-            <Typography className='content__title'>Task: </Typography>
-            <Typography className='content__title-heading'>Implement Snackbar Notifications with Redux</Typography>
+      <Card className={sn('card')}>
+        <CardContent className={sn('content')}>
+          <Box className={sn('content__task-title-container')}>
+            <Typography className={sn('content__title')}>Task: </Typography>
+            <Typography className={sn('content__title-heading')}>Implement Snackbar Notifications with Redux</Typography>
           </Box>
           <Box>
-            <Typography className='content__title'>Technologies Used</Typography>
-            <Box className='content__task-tags'>
-              <Chip label="React" className='content__task-tags-used'/>
-              <Chip label="TypeScript" className='content__task-tags-used'/>
-              <Chip label="Redux and Redux ToolKit" className='content__task-tags-used'/>
-              <Chip label="Material UI" className='content__task-tags-used'/>
+            <Typography className={sn('content__title')}>Technologies Used</Typography>
+            <Box className={sn('content__task-tags')}>
+              <Chip label="React" className={sn('content__task-tags-used')} />
+              <Chip label="TypeScript" className={sn('content__task-tags-used')} />
+              <Chip label="Redux and Redux ToolKit" className={sn('content__task-tags-used')} />
+              <Chip label="Material UI" className={sn('content__task-tags-used')} />
             </Box>
           </Box>
-          <Divider className='content__divider' />
-          <Box className='content__task-description'>
-            <Typography className='content__title'>Task Description</Typography>
-            <Box className='markdown-preview-container'>
+          <Divider className={sn('content__divider')} />
+          <Box>
+            <Typography className={sn('content__title')}>Task Description</Typography>
+            <Box className={sn('markdown-preview-container')}>
               <ReactMarkdown>{TASK_DESCRIPTION}</ReactMarkdown>
             </Box>
           </Box>
         </CardContent>
       </Card>
-      <Box sx={{ justifyContent: 'center', display: 'flex' }}>
+      <Box className={sn('card__back-button')}>
         <Button variant='contained' onClick={handleBack}>Back to Home Page</Button>
       </Box>
     </Box>
   )
 }
-export default ViewTask;
+export default withErrorBoundary(ViewTask);

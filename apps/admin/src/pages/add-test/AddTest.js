@@ -4,8 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useParams } from 'react-router-dom';
-import './AddTest.scss';
 import MultipleTaskSelect from 'ui-component/select-task/SelectTask';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './AddTest.module.scss';
+
+const sn = styleNames(styles);
 
 const AddTest = () => {
   const navigate = useNavigate();
@@ -44,21 +49,21 @@ const AddTest = () => {
     <Box>
       <Card>
         <CardContent>
-          <Box className='new-test'>
-            <Typography variant="h5" component="div" className='new-test__title'>
+          <Box className={sn('new-test')}>
+            <Typography variant="h5" component="div" className={sn('new-test__title')}>
               {id ? 'Edit Test' : 'Add New test'}
             </Typography>
             <Box>
               <Button variant="contained"
                 color="error"
                 onClick={handleCancel}
-                className='new-test__cancel-btn'
+                className={sn('new-test__cancel-btn')}
               >
                 Cancel
               </Button>
               <Button variant="contained"
                 onClick={formik.handleSubmit}
-                className='new-test__add-btn'
+                className={sn('new-test__add-btn')}
               >
                 {id ? 'Edit Test' : 'Add New Test'}
               </Button>
@@ -66,7 +71,7 @@ const AddTest = () => {
           </Box>
         </CardContent>
       </Card>
-      <Card className='card'>
+      <Card className={sn('card')}>
         <CardContent>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2} alignItems="center">
@@ -95,4 +100,4 @@ const AddTest = () => {
   );
 };
 
-export default AddTest;
+export default withErrorBoundary(AddTest);

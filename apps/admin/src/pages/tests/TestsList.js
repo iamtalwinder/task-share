@@ -22,7 +22,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
-import './TestsList.scss';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './TestsList.module.scss';
+
+const sn = styleNames(styles);
+
 
 function createData(id, title, usedIn) {
   return { id, title, usedIn };
@@ -64,18 +70,18 @@ const TestsList = () => {
 
   return (
     <Box>
-      <Card className='card'>
+      <Card className={sn('card')}>
         <CardContent>
           <Button variant='outlined' onClick={handleAddButtonClick}
-            className='card__add-new-test'>
-            <AddIcon className='card__add-icon' />
+            className={sn('card__add-new-test')}>
+            <AddIcon className={sn('card__add-icon')} />
             Add New Test
           </Button>
         </CardContent>
       </Card>
 
-      <TableContainer component={Paper} className='table'>
-        <Table aria-label='simple table' className='table__wrapper'>
+      <TableContainer component={Paper} className={sn('table')}>
+        <Table aria-label='simple table' className={sn('table__wrapper')}>
           <TableHead>
             <TableRow>
               <TableCell align="center">Title</TableCell>
@@ -91,16 +97,16 @@ const TestsList = () => {
               >
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
-                  <Chip label={row.usedIn} className='table__chip' />
+                  <Chip label={row.usedIn} className={sn('table__chip')} />
                 </TableCell>
                 <TableCell align="center">
-                  <Button className='table__action-button' onClick={() => handleEdit(row)}>
+                  <Button className={sn('table__action-button')} onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
-                  <Button className='table__action-button'>
+                  <Button className={sn('table__action-button')}>
                     <DeleteIcon />
                   </Button>
-                  <Button className='table__action-button' onClick={handleClick}>
+                  <Button className={sn('table__action-button')} onClick={handleClick}>
                     <MoreVertIcon />
                   </Button>
                 </TableCell>
@@ -115,13 +121,13 @@ const TestsList = () => {
                       horizontal: 'left'
                     }}
                   >
-                    <Paper className='paper'>
-                      <Button className='paper__extra-actions'>
-                        <AddLinkIcon className='paper__extra-icon' />
+                    <Paper className={sn('paper')}>
+                      <Button className={sn('paper__extra-actions')}>
+                        <AddLinkIcon className={sn('paper__extra-icon')} />
                         <Typography>Generate Link</Typography>
                       </Button>
-                      <Button className='paper__extra-actions'>
-                        <DownloadIcon className='paper__extra-icon' />
+                      <Button className={sn('paper__extra-actions')}>
+                        <DownloadIcon className={sn('paper__extra-icon')} />
                         <Typography>Download</Typography>
                       </Button>
                     </Paper>
@@ -136,4 +142,4 @@ const TestsList = () => {
   );
 };
 
-export default TestsList;
+export default withErrorBoundary(TestsList);

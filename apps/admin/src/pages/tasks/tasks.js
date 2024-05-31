@@ -23,7 +23,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
-import './Tasks.scss';
+import { styleNames } from 'libs/style-names';
+import { withErrorBoundary } from 'libs/error-boundary';
+
+import styles from './Tasks.module.scss';
+
+const sn = styleNames(styles);
 
 function createData(id, title, status) {
   return { id, title, status };
@@ -70,18 +75,18 @@ const TaskTable = () => {
 
   return (
     <Box>
-      <Card className='card'>
+      <Card className={sn('card')}>
         <CardContent>
           <Button variant='outlined' onClick={handleAddButtonClick}
-            className='card__add-new-task'>
-            <AddIcon className='card__add-icon' />
+            className={sn('card__add-new-task')}>
+            <AddIcon className={sn('card__add-icon')} />
             Add New Task
           </Button>
         </CardContent>
       </Card>
 
-      <TableContainer component={Paper} className='table'>
-        <Table aria-label='simple table' className='table__wrapper'>
+      <TableContainer component={Paper} className={sn('table')}>
+        <Table aria-label='simple table' className={sn('table__wrapper')}>
           <TableHead>
             <TableRow>
               <TableCell align="center">Title</TableCell>
@@ -98,24 +103,24 @@ const TaskTable = () => {
               >
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
-                  <Chip label="React" className='table__chip' />
-                  <Chip label="TypeScript" className='table__chip' />
+                  <Chip label="React" className={sn('table__chip')} />
+                  <Chip label="TypeScript" className={sn('table__chip')} />
                   <Chip label="Redux Toolkit" />
                 </TableCell>
                 <TableCell align="center">
-                  <Chip label={row.status} className='table__chip' />
+                  <Chip label={row.status} className={sn('table__chip')} />
                 </TableCell>
                 <TableCell align="center">
-                  <Button className='table__action-button' onClick={() => handleEdit(row)}>
+                  <Button className={sn('table__action-button')} onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
-                  <Button className='table__action-button' onClick={() => handleViewTask(row)}>
+                  <Button className={sn('table__action-button')} onClick={() => handleViewTask(row)}>
                     <RemoveRedEyeIcon />
                   </Button>
-                  <Button className='table__action-button'>
+                  <Button className={sn('table__action-button')}>
                     <DeleteIcon />
                   </Button>
-                  <Button className='table__action-button' onClick={handleClick}>
+                  <Button className={sn('table__action-button')} onClick={handleClick}>
                     <MoreVertIcon />
                   </Button>
                 </TableCell>
@@ -130,13 +135,13 @@ const TaskTable = () => {
                       horizontal: 'left'
                     }}
                   >
-                    <Paper className='paper'>
-                      <Button className='paper__extra-actions'>
-                        <AddLinkIcon className='paper__extra-icon' />
+                    <Paper className={sn('paper')}>
+                      <Button className={sn('paper__extra-actions')}>
+                        <AddLinkIcon className={sn('paper__extra-icon')} />
                         <Typography>Generate Link</Typography>
                       </Button>
-                      <Button className='paper__extra-actions'>
-                        <DownloadIcon className='paper__extra-icon' />
+                      <Button className={sn('paper__extra-actions')}>
+                        <DownloadIcon className={sn('paper__extra-icon')} />
                         <Typography>Download</Typography>
                       </Button>
                     </Paper>
@@ -151,4 +156,4 @@ const TaskTable = () => {
   );
 };
 
-export default TaskTable;
+export default withErrorBoundary(TaskTable);

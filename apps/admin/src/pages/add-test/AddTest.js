@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useParams } from 'react-router-dom';
 import './AddTest.scss';
-import MultipleTaskSelect from 'components/select-task/SelectTask';
+import MultipleTaskSelect from 'ui-component/select-task/SelectTask';
 
 const AddTest = () => {
   const navigate = useNavigate();

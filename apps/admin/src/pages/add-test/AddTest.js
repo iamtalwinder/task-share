@@ -18,32 +18,32 @@ const AddTest = () => {
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    task: yup.array().min(1, 'At least one task is required'),
+    task: yup.array().min(1, 'At least one task is required')
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      task: [],
+      task: []
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-    },
+    }
   });
 
   const handleCancel = () => {
     navigate('/tests');
-  }
+  };
 
   React.useEffect(() => {
     if (id) {
       formik.setValues({
         title: 'Todo List',
-        task: ['Create todo list', '', 'Snackbar with mui'],
+        task: ['Create todo list', '', 'Snackbar with mui']
       });
     }
-  }, [id]);
+  }, [id, formik]);
 
   return (
     <Box>
@@ -54,17 +54,10 @@ const AddTest = () => {
               {id ? 'Edit Test' : 'Add New test'}
             </Typography>
             <Box>
-              <Button variant="contained"
-                color="error"
-                onClick={handleCancel}
-                className={sn('new-test__cancel-btn')}
-              >
+              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-test__cancel-btn')}>
                 Cancel
               </Button>
-              <Button variant="contained"
-                onClick={formik.handleSubmit}
-                className={sn('new-test__add-btn')}
-              >
+              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-test__add-btn')}>
                 {id ? 'Edit Test' : 'Add New Test'}
               </Button>
             </Box>

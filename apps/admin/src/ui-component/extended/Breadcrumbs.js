@@ -139,7 +139,13 @@ const Breadcrumbs = ({ card, divider, icon, icons, maxItems, navigation, rightAl
               )}
               <Grid item>
                 <MuiBreadcrumbs
-                  sx={{ '& .MuiBreadcrumbs-separator': { width: 16, ml: 1.25, mr: 1.25 } }}
+                  sx={{
+                    '& .MuiBreadcrumbs-separator': {
+                      width: 16,
+                      ml: 1.25,
+                      mr: 1.25
+                    }
+                  }}
                   aria-label="breadcrumb"
                   maxItems={maxItems || 8}
                   separator={separatorIcon}

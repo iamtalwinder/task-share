@@ -14,7 +14,7 @@ import {
   InputLabel,
   OutlinedInput,
   Stack,
-  Typography,
+  Typography
 } from '@mui/material';
 
 import * as Yup from 'yup';
@@ -25,7 +25,6 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 

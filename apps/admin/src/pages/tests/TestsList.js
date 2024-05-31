@@ -29,15 +29,11 @@ import styles from './TestsList.module.scss';
 
 const sn = styleNames(styles);
 
-
 function createData(id, title, usedIn) {
   return { id, title, usedIn };
 }
 
-const rows = [
-  createData('1', 'Todo list', "Create todo list"),
-  createData('2', 'Mui Snackbar', "Create Snackbar with mui"),
-];
+const rows = [createData('1', 'Todo list', 'Create todo list'), createData('2', 'Mui Snackbar', 'Create Snackbar with mui')];
 
 const TestsList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
@@ -54,7 +50,7 @@ const TestsList = () => {
   };
 
   const handleAddButtonClick = () => {
-    navigate('/test/add')
+    navigate('/test/add');
   };
 
   const handleGenerateLink = () => {
@@ -62,8 +58,8 @@ const TestsList = () => {
   };
 
   const handleEdit = (data) => {
-    navigate(`/test/${data.id}/edit`)
-  }
+    navigate(`/test/${data.id}/edit`);
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -72,8 +68,7 @@ const TestsList = () => {
     <Box>
       <Card className={sn('card')}>
         <CardContent>
-          <Button variant='outlined' onClick={handleAddButtonClick}
-            className={sn('card__add-new-test')}>
+          <Button variant="outlined" onClick={handleAddButtonClick} className={sn('card__add-new-test')}>
             <AddIcon className={sn('card__add-icon')} />
             Add New Test
           </Button>
@@ -81,7 +76,7 @@ const TestsList = () => {
       </Card>
 
       <TableContainer component={Paper} className={sn('table')}>
-        <Table aria-label='simple table' className={sn('table__wrapper')}>
+        <Table aria-label="simple table" className={sn('table__wrapper')}>
           <TableHead>
             <TableRow>
               <TableCell align="center">Title</TableCell>
@@ -91,10 +86,7 @@ const TestsList = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
                   <Chip label={row.usedIn} className={sn('table__chip')} />
@@ -110,7 +102,7 @@ const TestsList = () => {
                     <MoreVertIcon />
                   </Button>
                 </TableCell>
-                {(isGenerateLink &&
+                {isGenerateLink && (
                   <Popover
                     id={id}
                     open={open}

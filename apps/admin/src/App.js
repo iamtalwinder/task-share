@@ -6,7 +6,6 @@ import Routes from 'routes';
 import themes from 'themes';
 import NavigationScroll from 'layout/NavigationScroll';
 
-
 const App = () => {
   const customization = useSelector((state) => state.customization);
 

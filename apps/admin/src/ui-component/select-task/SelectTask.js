@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography } from '@mui/material';
-import { Container, Draggable } from "react-smooth-dnd";
-import { arrayMoveImmutable as arrayMove } from "array-move";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import DragHandleIcon from "@material-ui/icons/DragHandle";
+import { Container, Draggable } from 'react-smooth-dnd';
+import { arrayMoveImmutable as arrayMove } from 'array-move';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import DragHandleIcon from '@material-ui/icons/DragHandle';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
 
@@ -22,9 +22,9 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
+      width: 250
+    }
+  }
 };
 
 const names = [
@@ -32,15 +32,12 @@ const names = [
   'Snackbar using material ui',
   'Register Form React-Redux',
   'Login Form Using React-Redux',
-  'DashBoard Screen using Redux Toolkit',
+  'DashBoard Screen using Redux Toolkit'
 ];
 
 function getStyles(name, taskName, theme) {
   return {
-    fontWeight:
-      taskName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
+    fontWeight: taskName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
   };
 }
 
@@ -50,7 +47,7 @@ const MultipleTaskSelect = () => {
 
   const handleChange = (event) => {
     const {
-      target: { value },
+      target: { value }
     } = event;
     const newSelectedItems = value.map((name) => ({ id: name, text: name }));
     setSelectedItems(newSelectedItems);
@@ -66,7 +63,7 @@ const MultipleTaskSelect = () => {
       <FormControl className={sn('form')}>
         <InputLabel id="select-task-label">Select Task</InputLabel>
         <Select
-          label='Select Task'
+          label="Select Task"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
@@ -85,7 +82,11 @@ const MultipleTaskSelect = () => {
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, selectedItems.map((item) => item.id), theme)}
+              style={getStyles(
+                name,
+                selectedItems.map((item) => item.id),
+                theme
+              )}
             >
               {name}
             </MenuItem>
@@ -110,6 +111,6 @@ const MultipleTaskSelect = () => {
       </FormControl>
     </Box>
   );
-}
+};
 
 export default withErrorBoundary(MultipleTaskSelect);

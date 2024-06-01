@@ -140,7 +140,13 @@ const ProfileSection = () => {
                     </Stack>
                     <Divider />
                   </Box>
-                  <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
+                  <PerfectScrollbar
+                    style={{
+                      height: '100%',
+                      maxHeight: 'calc(100vh - 250px)',
+                      overflowX: 'hidden'
+                    }}
+                  >
                     <Box sx={{ p: 2 }}>
                       <List
                         component="nav"
@@ -159,7 +165,9 @@ const ProfileSection = () => {
                         }}
                       >
                         <ListItemButton
-                          sx={{ borderRadius: `${customization.borderRadius}px` }}
+                          sx={{
+                            borderRadius: `${customization.borderRadius}px`
+                          }}
                           selected={selectedIndex === 0}
                           onClick={(event) => handleListItemClick(event, 0, '#')}
                         >
@@ -169,7 +177,9 @@ const ProfileSection = () => {
                           <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
                         </ListItemButton>
                         <ListItemButton
-                          sx={{ borderRadius: `${customization.borderRadius}px` }}
+                          sx={{
+                            borderRadius: `${customization.borderRadius}px`
+                          }}
                           selected={selectedIndex === 4}
                           onClick={handleLogout}
                         >

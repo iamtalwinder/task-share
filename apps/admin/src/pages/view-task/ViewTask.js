@@ -15,7 +15,7 @@ const ViewTask = () => {
 
   const handleBack = () => {
     navigate('/tasks');
-  }
+  };
 
   return (
     <Box>
@@ -44,9 +44,11 @@ const ViewTask = () => {
         </CardContent>
       </Card>
       <Box className={sn('card__back-button')}>
-        <Button variant='contained' onClick={handleBack}>Back to Home Page</Button>
+        <Button variant="contained" onClick={handleBack}>
+          Back to Home Page
+        </Button>
       </Box>
     </Box>
-  )
-}
+  );
+};
 export default withErrorBoundary(ViewTask);

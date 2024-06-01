@@ -18,32 +18,32 @@ const AddTask = () => {
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    tags: yup.array().min(1, 'At least one tag is required'),
+    tags: yup.array().min(1, 'At least one tag is required')
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      tags: [],
+      tags: []
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-    },
+    }
   });
 
   const handleCancel = () => {
     navigate('/tasks');
-  }
+  };
 
   React.useEffect(() => {
     if (id) {
       formik.setValues({
         title: 'Create todo list',
-        tags: ['React', 'TypeScript'],
+        tags: ['React', 'TypeScript']
       });
     }
-  }, [id]);
+  }, [id, formik]);
 
   return (
     <Box>
@@ -54,17 +54,10 @@ const AddTask = () => {
               {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
-              <Button variant="contained"
-                color="error"
-                onClick={handleCancel}
-                className={sn('new-task__cancel-btn')}
-              >
+              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-task__cancel-btn')}>
                 Cancel
               </Button>
-              <Button variant="contained"
-                onClick={formik.handleSubmit}
-                className={sn('new-task__add-btn')}
-              >
+              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-task__add-btn')}>
                 {id ? 'Edit Task' : 'Add Task'}
               </Button>
             </Box>
@@ -93,7 +86,7 @@ const AddTask = () => {
                 <MuiChipsInput
                   value={formik.values.tags}
                   onChange={(tags) => formik.setFieldValue('tags', tags)}
-                  placeholder='Type tags you want to add'
+                  placeholder="Type tags you want to add"
                   error={formik.touched.tags && Boolean(formik.errors.tags)}
                   helperText={formik.touched.tags && formik.errors.tags}
                   className={sn('card__chip-input')}

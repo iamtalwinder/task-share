@@ -24,9 +24,7 @@ const NavItem = ({ item, level }) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down('lg'));
 
   const Icon = item.icon;
-  const itemIcon = item?.icon ? (
-    <Icon stroke={1.5} size="1.3rem" />
-  ) : ''
+  const itemIcon = item?.icon ? <Icon stroke={1.5} size="1.3rem" /> : '';
   // (
   //   <FiberManualRecordIcon
   //     sx={{
@@ -61,7 +59,7 @@ const NavItem = ({ item, level }) => {
       .split('/')
       .findIndex((id) => id === item.id || pluralize(id) === item.id);
 
-      if (currentIndex > -1) {
+    if (currentIndex > -1) {
       dispatch({ type: MENU_OPEN, id: item.id });
     }
     // eslint-disable-next-line

@@ -1,2 +1,2 @@
-export {ErrorBoundary} from './error-boundary';
-export {withErrorBoundary} from './with-error-boundary';
+export { ErrorBoundary } from './error-boundary';
+export { withErrorBoundary } from './with-error-boundary';

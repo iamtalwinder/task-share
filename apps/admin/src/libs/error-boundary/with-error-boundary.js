@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ErrorBoundary} from './error-boundary';
+import { ErrorBoundary } from './error-boundary';
 
 export const withErrorBoundary = (WrappedComponent) => {
   const WithErrorBoundary = (props) => (
@@ -10,7 +10,7 @@ export const withErrorBoundary = (WrappedComponent) => {
   );
 
   WithErrorBoundary.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
   };
 
   return WithErrorBoundary;

@@ -9,7 +9,11 @@ import MuiAvatar from '@mui/material/Avatar';
 const Avatar = ({ color, outline, size, sx, ...others }) => {
   const theme = useTheme();
 
-  const colorSX = color && !outline && { color: theme.palette.background.paper, bgcolor: `${color}.main` };
+  const colorSX = color &&
+    !outline && {
+      color: theme.palette.background.paper,
+      bgcolor: `${color}.main`
+    };
   const outlineSX = outline && {
     color: color ? `${color}.main` : `primary.main`,
     bgcolor: theme.palette.background.paper,

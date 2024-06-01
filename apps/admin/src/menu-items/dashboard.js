@@ -1,4 +1,3 @@
-
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const tasks = {
@@ -20,6 +19,6 @@ const tasks = {
       breadcrumbs: false
     }
   ]
-}
+};
 
 export default tasks;

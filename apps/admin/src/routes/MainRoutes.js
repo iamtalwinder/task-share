@@ -51,7 +51,7 @@ const MainRoutes = {
     {
       path: '/test/:id/edit',
       element: <AddTest />
-    },
+    }
   ]
 };
 

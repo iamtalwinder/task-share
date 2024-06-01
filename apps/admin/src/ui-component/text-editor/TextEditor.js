@@ -21,7 +21,7 @@ const MarkdownEditor = () => {
         <textarea
           value={markdown}
           onChange={handleMarkdownChange}
-          placeholder='Enter Markdown here...'
+          placeholder="Enter Markdown here..."
           className={sn('editor__textarea-content')}
         />
       </div>

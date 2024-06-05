@@ -17,7 +17,7 @@ const MainRoutes = {
     {
       path: '/tasks',
       default: true,
-      element: <TaskDefault />
+      element: <TaskDefault />,
     },
     // {
     //   path: 'dashboard',
@@ -30,29 +30,29 @@ const MainRoutes = {
     // },
     {
       path: '/task/add',
-      element: <AddTaskDefault />
+      element: <AddTaskDefault />,
     },
     {
       path: '/task/:id/edit',
-      element: <AddTaskDefault />
+      element: <AddTaskDefault />,
     },
     {
       path: '/task/:id/view',
-      element: <ViewTask />
+      element: <ViewTask />,
     },
     {
       path: '/tests',
-      element: <TestList />
+      element: <TestList />,
     },
     {
       path: '/test/add',
-      element: <AddTest />
+      element: <AddTest />,
     },
     {
       path: '/test/:id/edit',
-      element: <AddTest />
-    }
-  ]
+      element: <AddTest />,
+    },
+  ],
 };
 
 export default MainRoutes;

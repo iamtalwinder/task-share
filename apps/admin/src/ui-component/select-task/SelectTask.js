@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, MenuItem, FormControl, Select, Chip, InputLabel, Typography } from '@mui/material';
+import {
+  Box,
+  MenuItem,
+  FormControl,
+  Select,
+  Chip,
+  InputLabel,
+  Typography,
+} from '@mui/material';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
 import List from '@material-ui/core/List';
@@ -22,9 +30,9 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
+      width: 250,
+    },
+  },
 };
 
 const names = [
@@ -32,12 +40,15 @@ const names = [
   'Snackbar using material ui',
   'Register Form React-Redux',
   'Login Form Using React-Redux',
-  'DashBoard Screen using Redux Toolkit'
+  'DashBoard Screen using Redux Toolkit',
 ];
 
 function getStyles(name, taskName, theme) {
   return {
-    fontWeight: taskName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
+    fontWeight:
+      taskName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
   };
 }
 
@@ -47,7 +58,7 @@ const MultipleTaskSelect = () => {
 
   const handleChange = (event) => {
     const {
-      target: { value }
+      target: { value },
     } = event;
     const newSelectedItems = value.map((name) => ({ id: name, text: name }));
     setSelectedItems(newSelectedItems);
@@ -59,7 +70,9 @@ const MultipleTaskSelect = () => {
 
   return (
     <Box>
-      <Typography className={sn('input__label')}>Select task from the below list</Typography>
+      <Typography className={sn('input__label')}>
+        Select task from the below list
+      </Typography>
       <FormControl className={sn('form')}>
         <InputLabel id="select-task-label">Select Task</InputLabel>
         <Select
@@ -85,7 +98,7 @@ const MultipleTaskSelect = () => {
               style={getStyles(
                 name,
                 selectedItems.map((item) => item.id),
-                theme
+                theme,
               )}
             >
               {name}
@@ -93,7 +106,11 @@ const MultipleTaskSelect = () => {
           ))}
         </Select>
         <List sx={{ ITEM_PADDING_TOP }}>
-          <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}>
+          <Container
+            dragHandleSelector=".drag-handle"
+            lockAxis="y"
+            onDrop={onDrop}
+          >
             {selectedItems.map(({ id, text }) => (
               <Draggable key={id}>
                 <ListItem>

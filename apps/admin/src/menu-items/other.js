@@ -14,7 +14,7 @@ const other = {
       type: 'item',
       url: '/sample-page',
       icon: icons.IconBrandChrome,
-      breadcrumbs: false
+      breadcrumbs: false,
     },
     {
       id: 'documentation',
@@ -23,9 +23,9 @@ const other = {
       url: 'https://codedthemes.gitbook.io/berry/',
       icon: icons.IconHelp,
       external: true,
-      target: true
-    }
-  ]
+      target: true,
+    },
+  ],
 };
 
 export default other;

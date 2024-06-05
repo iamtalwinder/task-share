@@ -1,9 +1,13 @@
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import reducer from './reducer';
 
-// ==============================|| REDUX - MAIN STORE ||============================== //
+export const makeStore = (preloadedState) => {
+  const store = configureStore({
+    reducer,
+    preloadedState,
+  });
 
-const store = createStore(reducer);
-const persister = 'Free';
+  return store;
+};
 
-export { store, persister };
+export const store = makeStore();

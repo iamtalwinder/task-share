@@ -117,7 +117,7 @@ const ProfileSection = () => {
             <Paper sx={{ padding: 0 }}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                  <Box sx={{ p: 2, padding: 0 }}>
+                  <Box sx={{ p: 2}}>
                     <List
                       component="nav"
                       sx={{
@@ -144,7 +144,7 @@ const ProfileSection = () => {
                         <ListItemIcon>
                           <IconSettings stroke={1.5} size="1.3rem" />
                         </ListItemIcon>
-                        <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
+                        <ListItemText primary={<Typography variant="body2">Settings</Typography>} />
                       </ListItemButton>
                       <ListItemButton
                         sx={{

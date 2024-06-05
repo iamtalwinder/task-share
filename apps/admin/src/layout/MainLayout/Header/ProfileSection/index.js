@@ -2,18 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import {
-  Box,
-  Chip,
-  ClickAwayListener,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Popper,
-  Typography,
-} from '@mui/material';
+import { Box, Chip, ClickAwayListener, List, ListItemButton, ListItemIcon, ListItemText, Paper, Popper, Typography } from '@mui/material';
 
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
@@ -78,20 +67,14 @@ const ProfileSection = () => {
             background: `${theme.palette.primary.main}!important`,
             color: theme.palette.primary.light,
             '& svg': {
-              stroke: theme.palette.primary.light,
-            },
+              stroke: theme.palette.primary.light
+            }
           },
           '& .MuiChip-label': {
-            lineHeight: 0,
-          },
+            lineHeight: 0
+          }
         }}
-        label={
-          <IconSettings
-            stroke={1.5}
-            size="1.5rem"
-            color={theme.palette.primary.main}
-          />
-        }
+        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -111,23 +94,17 @@ const ProfileSection = () => {
             {
               name: 'offset',
               options: {
-                offset: [0, 14],
-              },
-            },
-          ],
+                offset: [0, 14]
+              }
+            }
+          ]
         }}
       >
         {({ TransitionProps }) => (
           <Transitions in={open} {...TransitionProps}>
             <Paper sx={{ padding: 0 }}>
               <ClickAwayListener onClickAway={handleClose}>
-                <MainCard
-                  border={false}
-                  elevation={16}
-                  content={false}
-                  boxShadow
-                  shadow={theme.shadows[16]}
-                >
+                <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                   <Box sx={{ p: 2 }}>
                     <List
                       component="nav"
@@ -138,16 +115,16 @@ const ProfileSection = () => {
                         backgroundColor: theme.palette.background.paper,
                         borderRadius: '10px',
                         [theme.breakpoints.down('md')]: {
-                          minWidth: '100%',
+                          minWidth: '100%'
                         },
                         '& .MuiListItemButton-root': {
-                          mt: 0.5,
-                        },
+                          mt: 0.5
+                        }
                       }}
                     >
                       <ListItemButton
                         sx={{
-                          borderRadius: `${customization.borderRadius}px`,
+                          borderRadius: `${customization.borderRadius}px`
                         }}
                         selected={selectedIndex === 0}
                         onClick={(event) => handleListItemClick(event, 0, '#')}
@@ -155,15 +132,11 @@ const ProfileSection = () => {
                         <ListItemIcon>
                           <IconSettings stroke={1.5} size="1.3rem" />
                         </ListItemIcon>
-                        <ListItemText
-                          primary={
-                            <Typography variant="body2">Settings</Typography>
-                          }
-                        />
+                        <ListItemText primary={<Typography variant="body2">Settings</Typography>} />
                       </ListItemButton>
                       <ListItemButton
                         sx={{
-                          borderRadius: `${customization.borderRadius}px`,
+                          borderRadius: `${customization.borderRadius}px`
                         }}
                         selected={selectedIndex === 4}
                         onClick={handleLogout}
@@ -171,11 +144,7 @@ const ProfileSection = () => {
                         <ListItemIcon>
                           <IconLogout stroke={1.5} size="1.3rem" />
                         </ListItemIcon>
-                        <ListItemText
-                          primary={
-                            <Typography variant="body2">Logout</Typography>
-                          }
-                        />
+                        <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
                       </ListItemButton>
                     </List>
                   </Box>

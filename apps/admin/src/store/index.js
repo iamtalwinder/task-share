@@ -4,7 +4,7 @@ import reducer from './reducer';
 export const makeStore = (preloadedState) => {
   const store = configureStore({
     reducer,
-    preloadedState,
+    preloadedState
   });
 
   return store;

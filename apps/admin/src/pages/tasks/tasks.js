@@ -13,7 +13,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Chip,
+  Chip
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -37,7 +37,7 @@ function createData(id, title, status) {
 const rows = [
   createData('1', 'Create todo list', 'used'),
   createData('2', 'Create user form using redux', 'not used'),
-  createData('3', 'Create Snackbar with mui', 'used'),
+  createData('3', 'Create Snackbar with mui', 'used')
 ];
 
 const TaskTable = () => {
@@ -77,11 +77,7 @@ const TaskTable = () => {
     <Box>
       <Card className={sn('card')}>
         <CardContent>
-          <Button
-            variant="outlined"
-            onClick={handleAddButtonClick}
-            className={sn('card__add-new-task')}
-          >
+          <Button variant="outlined" onClick={handleAddButtonClick} className={sn('card__add-new-task')}>
             <AddIcon className={sn('card__add-icon')} />
             Add New Task
           </Button>
@@ -100,10 +96,7 @@ const TaskTable = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
                   <Chip label="React" className={sn('table__chip')} />
@@ -114,25 +107,16 @@ const TaskTable = () => {
                   <Chip label={row.status} className={sn('table__chip')} />
                 </TableCell>
                 <TableCell align="center">
-                  <Button
-                    className={sn('table__action-button')}
-                    onClick={() => handleEdit(row)}
-                  >
+                  <Button className={sn('table__action-button')} onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
-                  <Button
-                    className={sn('table__action-button')}
-                    onClick={() => handleViewTask(row)}
-                  >
+                  <Button className={sn('table__action-button')} onClick={() => handleViewTask(row)}>
                     <RemoveRedEyeIcon />
                   </Button>
                   <Button className={sn('table__action-button')}>
                     <DeleteIcon />
                   </Button>
-                  <Button
-                    className={sn('table__action-button')}
-                    onClick={handleClick}
-                  >
+                  <Button className={sn('table__action-button')} onClick={handleClick}>
                     <MoreVertIcon />
                   </Button>
                 </TableCell>
@@ -144,7 +128,7 @@ const TaskTable = () => {
                     onClose={handleClose}
                     anchorOrigin={{
                       vertical: 'bottom',
-                      horizontal: 'left',
+                      horizontal: 'left'
                     }}
                   >
                     <Paper className={sn('paper')}>

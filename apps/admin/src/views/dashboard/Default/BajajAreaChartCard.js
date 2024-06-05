@@ -26,8 +26,8 @@ const BajajAreaChartCard = () => {
       ...chartData.options,
       colors: [orangeDark],
       tooltip: {
-        theme: 'light',
-      },
+        theme: 'light'
+      }
     };
     ApexCharts.exec(`support-chart`, 'updateOptions', newSupportChart);
   }, [navType, orangeDark]);
@@ -38,10 +38,7 @@ const BajajAreaChartCard = () => {
         <Grid item xs={12}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography
-                variant="subtitle1"
-                sx={{ color: theme.palette.secondary.dark }}
-              >
+              <Typography variant="subtitle1" sx={{ color: theme.palette.secondary.dark }}>
                 Bajaj Finery
               </Typography>
             </Grid>
@@ -53,10 +50,7 @@ const BajajAreaChartCard = () => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography
-            variant="subtitle2"
-            sx={{ color: theme.palette.grey[800] }}
-          >
+          <Typography variant="subtitle2" sx={{ color: theme.palette.grey[800] }}>
             10% Profit
           </Typography>
         </Grid>

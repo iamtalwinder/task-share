@@ -3,7 +3,7 @@ import { JwtService } from '../service/jwt.service';
 
 export function authRoutes() {
   this.post('/login', function (schema, request) {
-    console.log(schema)
+    console.log(schema);
     const attrs = JSON.parse(request.requestBody);
     const user = schema.users.findBy({
       email: attrs.email,

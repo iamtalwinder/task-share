@@ -12,7 +12,7 @@ const initialState = {
 export const loginSlice = createAppSlice({
   name: 'auth/login',
   initialState,
-  reducers: create => ({
+  reducers: (create) => ({
     submitLogin: create.asyncThunk(
       async ({ email, password }, { rejectWithValue, dispatch }) => {
         try {
@@ -23,11 +23,11 @@ export const loginSlice = createAppSlice({
         }
       },
       {
-        pending: state => {
+        pending: (state) => {
           state.errors = [];
           state.status = APIStatusEnum.LOADING;
         },
-        fulfilled: state => {
+        fulfilled: (state) => {
           state.errors = [];
           state.status = APIStatusEnum.SUCCESS;
         },
@@ -39,9 +39,9 @@ export const loginSlice = createAppSlice({
     )
   }),
   selectors: {
-    selectLoginError: state => state.errors,
-    selectLoginStatus: state => state.status
-  },
+    selectLoginError: (state) => state.errors,
+    selectLoginStatus: (state) => state.status
+  }
 });
 
 export const { submitLogin } = loginSlice.actions;

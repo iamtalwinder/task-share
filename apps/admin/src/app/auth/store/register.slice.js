@@ -12,7 +12,7 @@ const initialState = {
 export const registerSlice = createAppSlice({
   name: 'auth/register',
   initialState,
-  reducers: create => ({
+  reducers: (create) => ({
     submitRegister: create.asyncThunk(
       async (data, { rejectWithValue, dispatch }) => {
         try {
@@ -23,11 +23,11 @@ export const registerSlice = createAppSlice({
         }
       },
       {
-        pending: state => {
+        pending: (state) => {
           state.errors = [];
           state.status = APIStatusEnum.LOADING;
         },
-        fulfilled: state => {
+        fulfilled: (state) => {
           state.errors = [];
           state.status = APIStatusEnum.SUCCESS;
         },
@@ -39,9 +39,9 @@ export const registerSlice = createAppSlice({
     )
   }),
   selectors: {
-    selectRegisterError: state => state.errors,
-    selectRegisterStatus: state => state.status
-  },
+    selectRegisterError: (state) => state.errors,
+    selectRegisterStatus: (state) => state.status
+  }
 });
 
 export const { submitRegister } = registerSlice.actions;

@@ -30,8 +30,8 @@ const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
-  const loginStatus = useSelector(state => selectLoginStatus(state.auth));
-  const loginError = useSelector(state => selectLoginError(state.auth));
+  const loginStatus = useSelector((state) => selectLoginStatus(state.auth));
+  const loginError = useSelector((state) => selectLoginError(state.auth));
 
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
@@ -143,9 +143,7 @@ const FirebaseLogin = ({ ...others }) => {
 
             {loginError?.length > 0 && (
               <Box sx={{ mt: 2 }}>
-                <FormHelperText error>
-                  {loginError[0].message}
-                </FormHelperText>
+                <FormHelperText error>{loginError[0].message}</FormHelperText>
               </Box>
             )}
 

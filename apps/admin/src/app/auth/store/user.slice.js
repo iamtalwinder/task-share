@@ -9,28 +9,30 @@ const initialState = {
 export const userSlice = createAppSlice({
   name: 'auth/user',
   initialState,
-  reducers: create => ({
+  reducers: (create) => ({
     setUser: create.reducer((state, action) => {
       state.user = action.payload;
     }),
     fetchUserProfile: create.asyncThunk(
       async (userId, { rejectWithValue }) => {
         try {
-          const response = { data: { id: userId, name: 'John Doe', email: 'user1@example.com' } }; // Mocked response
+          const response = {
+            data: { id: userId, name: 'John Doe', email: 'user1@example.com' }
+          }; // Mocked response
           return response.data;
         } catch (error) {
           return rejectWithValue('Failed to fetch user profile');
         }
       },
       {
-        pending: state => {
+        pending: (state) => {
           state.status = APIStatusEnum.LOADING;
         },
         fulfilled: (state, action) => {
           state.status = APIStatusEnum.IDLE;
           state.user = action.payload;
         },
-        rejected: state => {
+        rejected: (state) => {
           state.status = APIStatusEnum.FAILED;
         }
       }

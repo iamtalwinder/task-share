@@ -3,4 +3,4 @@ export const APIStatusEnum = Object.freeze({
   SUCCESS: 'success',
   FAILED: 'failed',
   LOADING: 'loading'
-})
+});

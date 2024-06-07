@@ -5,7 +5,7 @@ import reducer from './reducer';
 const makeStore = (preloadedState) => {
   const store = configureStore({
     reducer,
-    middleware: getDefaultMiddleware => {
+    middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware().concat();
     },
     preloadedState
@@ -16,7 +16,4 @@ const makeStore = (preloadedState) => {
 
 const store = makeStore();
 
-export {
-  store,
-  createAppSlice
-}
+export { store, createAppSlice };

@@ -6,8 +6,8 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     axios.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         if (error.response.status === 401) {
           EventDispatcher.dispatchUnauthorized();
         }

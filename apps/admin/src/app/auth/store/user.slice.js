@@ -1,5 +1,5 @@
 import { APIStatusEnum } from 'app/types';
-import { createAppSlice } from '../../store/create-app-slice';
+import { createAppSlice } from 'app/store';
 
 const initialState = {
   user: null,

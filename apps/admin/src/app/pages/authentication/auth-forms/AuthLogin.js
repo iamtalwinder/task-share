@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useTheme } from '@mui/material/styles';
 import {
@@ -23,8 +23,7 @@ import useScriptRef from 'app/hooks/useScriptRef';
 import AnimateButton from 'app/ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useDispatch, useSelector } from 'react-redux';
-import { APIStatusEnum } from 'app/types';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { selectLoginStatus } from 'app/auth/store/login.slice';
 

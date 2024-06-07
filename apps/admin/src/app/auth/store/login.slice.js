@@ -1,6 +1,6 @@
-import { authService } from '../../services/auth.service';
 import { APIStatusEnum } from 'app/types';
-import { createAppSlice } from 'app/store/create-app-slice';
+import { createAppSlice } from 'app/store';
+import { authService } from 'app/services';
 import { setUser } from './user.slice';
 
 const initialState = {

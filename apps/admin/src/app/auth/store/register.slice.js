@@ -32,7 +32,7 @@ export const registerSlice = createAppSlice({
           state.status = APIStatusEnum.SUCCESS;
         },
         rejected: (state, action) => {
-          state.errors = action.payload.errors;;
+          state.errors = action.payload.errors;
           state.status = APIStatusEnum.FAILED;
         }
       }

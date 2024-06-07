@@ -1,13 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
+import createAppSlice from './create-app-slice';
 import reducer from './reducer';
 
-export const makeStore = (preloadedState) => {
+const makeStore = (preloadedState) => {
   const store = configureStore({
     reducer,
+    middleware: getDefaultMiddleware => {
+      return getDefaultMiddleware().concat();
+    },
     preloadedState
   });
 
   return store;
 };
 
-export const store = makeStore();
+const store = makeStore();
+
+export {
+  store,
+  createAppSlice
+}

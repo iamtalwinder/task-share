@@ -8,10 +8,12 @@ import App from 'app';
 import { store } from 'app/store';
 
 import 'app/assets/scss/style.scss';
+import 'mocks/api'
 import config from './app/config';
 
+
 const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <BrowserRouter basename={config.basename}>

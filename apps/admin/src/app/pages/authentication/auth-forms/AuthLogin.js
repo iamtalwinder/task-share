@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   Box,
@@ -16,18 +15,16 @@ import {
   Stack,
   Typography
 } from '@mui/material';
-
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import useScriptRef from 'app/hooks/useScriptRef';
 import AnimateButton from 'app/ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { selectLoginStatus } from 'app/auth/store/login.slice';
-
-// ============================|| FIREBASE - LOGIN ||============================ //
+import { selectLoginStatus, submitLogin } from 'app/auth/store/login.slice'; // Import submitLogin action
+import { APIStatusEnum } from 'app/types';
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
@@ -64,8 +61,8 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -75,9 +72,10 @@ const FirebaseLogin = ({ ...others }) => {
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             if (scriptedRef.current) {
+              // Dispatch the async login action
+              dispatch(submitLogin({ email: values.email, password: values.password }));
               setStatus({ success: true });
               setSubmitting(false);
-              dispatch(setSubmitting(values));
             }
           } catch (err) {
             console.error(err);

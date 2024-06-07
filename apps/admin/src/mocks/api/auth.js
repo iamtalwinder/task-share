@@ -3,8 +3,9 @@ import { JwtService } from '../service/jwt.service';
 
 export function authRoutes() {
   this.post('/login', function (schema, request) {
+    console.log(schema)
     const attrs = JSON.parse(request.requestBody);
-    const user = schema.user.findBy({
+    const user = schema.users.findBy({
       email: attrs.email,
       password: attrs.password
     });
@@ -19,8 +20,6 @@ export function authRoutes() {
     }
 
     if (errors.length === 0) {
-      delete user.password;
-
       return {
         user,
         ...JwtService.generateTokens(user)
@@ -32,7 +31,7 @@ export function authRoutes() {
 
   this.post('/register', function (schema, request) {
     const attrs = JSON.parse(request.requestBody);
-    const user = schema.user.create({ id: Date.now(), ...attrs });
+    const user = schema.users.create({ id: Date.now(), ...attrs });
 
     return { user, ...JwtService.generateTokens(user) };
   });
@@ -48,7 +47,7 @@ export function authRoutes() {
       return new Response(401, {}, { errors });
     }
 
-    const user = schema.user.findBy({ id: payload.userId });
+    const user = schema.users.findBy({ id: payload.userId });
 
     return JwtService.generateTokens(user);
   });

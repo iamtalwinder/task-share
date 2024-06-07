@@ -1,4 +1,4 @@
-import { createServer, Model } from 'miragejs';
+import { createServer, Model, belongsTo } from 'miragejs';
 import { users } from '../data/users';
 import { authRoutes } from './auth';
 import { userRoutes } from './user';
@@ -30,3 +30,5 @@ export function makeServer({ environment = 'development' } = {}) {
 
   return server;
 }
+
+makeServer();

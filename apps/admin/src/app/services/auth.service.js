@@ -1,4 +1,6 @@
-import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY, UNAUTHORIZED_EVENT } from 'app/constants';
+import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from 'app/constants';
+import { EventDispatcher } from 'libs/event-dispatcher';
+
 import axios from 'axios';
 
 class AuthService {
@@ -7,8 +9,7 @@ class AuthService {
       response => response,
       error => {
         if (error.response.status === 401) {
-          const customEvent = new CustomEvent(UNAUTHORIZED_EVENT);
-          window.dispatchEvent(customEvent);
+          EventDispatcher.dispatchUnauthorized();
         }
         return Promise.reject(error);
       }

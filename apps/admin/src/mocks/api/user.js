@@ -14,6 +14,6 @@ export const userRoutes = function (schema, request) {
       return new Response(401, {}, { errors });
     }
 
-    return schema.user.findBy({ id: payload.userId });
+    return schema.users.findBy({ id: payload.userId });
   });
 };

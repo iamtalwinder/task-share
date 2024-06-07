@@ -15,7 +15,7 @@ export function authRoutes() {
     if (!user) {
       errors.push({
         type: 'invalid_credentials',
-        message: 'Check your email & password'
+        message: 'Invalid credentials, check your email & password'
       });
     }
 

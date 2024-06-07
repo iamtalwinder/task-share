@@ -23,7 +23,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { selectLoginStatus, submitLogin } from 'app/auth/store/login.slice'; // Import submitLogin action
+import { selectLoginError, selectLoginStatus, submitLogin } from 'app/auth/store/login.slice';
 import { APIStatusEnum } from 'app/types';
 
 const FirebaseLogin = ({ ...others }) => {
@@ -31,6 +31,8 @@ const FirebaseLogin = ({ ...others }) => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const loginStatus = useSelector(state => selectLoginStatus(state.auth));
+  const loginError = useSelector(state => selectLoginError(state.auth));
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,7 +74,6 @@ const FirebaseLogin = ({ ...others }) => {
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             if (scriptedRef.current) {
-              // Dispatch the async login action
               dispatch(submitLogin({ email: values.email, password: values.password }));
               setStatus({ success: true });
               setSubmitting(false);
@@ -139,6 +140,15 @@ const FirebaseLogin = ({ ...others }) => {
                 </FormHelperText>
               )}
             </FormControl>
+
+            {loginError?.length > 0 && (
+              <Box sx={{ mt: 2 }}>
+                <FormHelperText error>
+                  {loginError[0].message}
+                </FormHelperText>
+              </Box>
+            )}
+
             <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
               <FormControlLabel
                 control={
@@ -150,6 +160,7 @@ const FirebaseLogin = ({ ...others }) => {
                 Forgot Password?
               </Typography>
             </Stack>
+
             {errors.submit && (
               <Box sx={{ mt: 3 }}>
                 <FormHelperText error>{errors.submit}</FormHelperText>

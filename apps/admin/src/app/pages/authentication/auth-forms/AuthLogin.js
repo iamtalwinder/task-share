@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useTheme } from '@mui/material/styles';
 import {
@@ -19,12 +19,14 @@ import {
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-
 import useScriptRef from 'app/hooks/useScriptRef';
 import AnimateButton from 'app/ui-component/extended/AnimateButton';
-
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useDispatch, useSelector } from 'react-redux';
+import { APIStatusEnum } from 'app/types';
+import { useNavigate } from 'react-router';
+import { selectLoginStatus } from 'app/auth/store/login.slice';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -32,8 +34,17 @@ const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
-
+  const loginStatus = useSelector(state => selectLoginStatus(state.auth));
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loginStatus === APIStatusEnum.SUCCESS) {
+      navigate('/tasks');
+    }
+  }, [loginStatus, navigate]);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -67,6 +78,7 @@ const FirebaseLogin = ({ ...others }) => {
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
+              dispatch(setSubmitting(values));
             }
           } catch (err) {
             console.error(err);

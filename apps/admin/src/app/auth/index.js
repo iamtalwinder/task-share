@@ -3,6 +3,7 @@ import { UNAUTHORIZED_EVENT } from 'libs/event-dispatcher';
 import { authService } from 'app/services';
 import useEventListener from 'app/hooks/useEventListener';
 import { useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 const Auth = ({ children }) => {
   const navigate = useNavigate();

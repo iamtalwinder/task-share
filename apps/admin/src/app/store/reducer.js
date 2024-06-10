@@ -4,7 +4,7 @@ import customizationReducer from './customizationReducer';
 
 const reducer = combineReducers({
   auth: authReducer,
-  customization: customizationReducer,
+  customization: customizationReducer
 });
 
 export default reducer;

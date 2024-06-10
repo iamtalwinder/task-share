@@ -19,24 +19,12 @@ const linkSX = {
   color: 'grey.900',
   textDecoration: 'none',
   alignContent: 'center',
-  alignItems: 'center',
+  alignItems: 'center'
 };
 
 // ==============================|| BREADCRUMBS ||============================== //
 
-const Breadcrumbs = ({
-  card,
-  divider,
-  icon,
-  icons,
-  maxItems,
-  navigation,
-  rightAlign,
-  separator,
-  title,
-  titleBottom,
-  ...others
-}) => {
+const Breadcrumbs = ({ card, divider, icon, icons, maxItems, navigation, rightAlign, separator, title, titleBottom, ...others }) => {
   const theme = useTheme();
 
   const iconStyle = {
@@ -44,7 +32,7 @@ const Breadcrumbs = ({
     marginTop: `-${theme.spacing(0.25)}`,
     width: '1rem',
     height: '1rem',
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.main
   };
 
   const [main, setMain] = useState();
@@ -78,11 +66,7 @@ const Breadcrumbs = ({
 
   // item separator
   const SeparatorIcon = separator;
-  const separatorIcon = separator ? (
-    <SeparatorIcon stroke={1.5} size="1rem" />
-  ) : (
-    <IconTallymark1 stroke={1.5} size="1rem" />
-  );
+  const separatorIcon = separator ? <SeparatorIcon stroke={1.5} size="1rem" /> : <IconTallymark1 stroke={1.5} size="1rem" />;
 
   let mainContent;
   let itemContent;
@@ -115,7 +99,7 @@ const Breadcrumbs = ({
           textDecoration: 'none',
           alignContent: 'center',
           alignItems: 'center',
-          color: 'grey.500',
+          color: 'grey.500'
         }}
       >
         {icons && <ItemIcon style={iconStyle} />}
@@ -131,8 +115,7 @@ const Breadcrumbs = ({
             marginBottom: card === false ? 0 : theme.spacing(gridSpacing),
             border: card === false ? 'none' : '1px solid',
             borderColor: theme.palette.primary[200] + 75,
-            background:
-              card === false ? 'transparent' : theme.palette.background.default,
+            background: card === false ? 'transparent' : theme.palette.background.default
           }}
           {...others}
         >
@@ -157,20 +140,14 @@ const Breadcrumbs = ({
                     '& .MuiBreadcrumbs-separator': {
                       width: 16,
                       ml: 1.25,
-                      mr: 1.25,
-                    },
+                      mr: 1.25
+                    }
                   }}
                   aria-label="breadcrumb"
                   maxItems={maxItems || 8}
                   separator={separatorIcon}
                 >
-                  <Typography
-                    component={Link}
-                    to="/"
-                    color="inherit"
-                    variant="subtitle1"
-                    sx={linkSX}
-                  >
+                  <Typography component={Link} to="/" color="inherit" variant="subtitle1" sx={linkSX}>
                     {icons && <HomeTwoToneIcon sx={iconStyle} />}
                     {icon && <HomeIcon sx={{ ...iconStyle, mr: 0 }} />}
                     {!icon && 'Dashboard'}
@@ -188,11 +165,7 @@ const Breadcrumbs = ({
               )}
             </Grid>
           </Box>
-          {card === false && divider !== false && (
-            <Divider
-              sx={{ borderColor: theme.palette.primary.main, mb: gridSpacing }}
-            />
-          )}
+          {card === false && divider !== false && <Divider sx={{ borderColor: theme.palette.primary.main, mb: gridSpacing }} />}
         </Card>
       );
     }
@@ -211,7 +184,7 @@ Breadcrumbs.propTypes = {
   rightAlign: PropTypes.bool,
   separator: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   title: PropTypes.bool,
-  titleBottom: PropTypes.bool,
+  titleBottom: PropTypes.bool
 };
 
 export default Breadcrumbs;

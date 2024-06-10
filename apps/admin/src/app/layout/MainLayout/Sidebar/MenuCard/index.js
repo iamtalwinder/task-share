@@ -13,7 +13,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
-  linearProgressClasses,
+  linearProgressClasses
 } from '@mui/material';
 
 // assets
@@ -24,12 +24,12 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
   borderRadius: 30,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    backgroundColor: theme.palette.primary.main,
-  },
+    backgroundColor: theme.palette.primary.main
+  }
 }));
 
 const CardStyle = styled(Card)(({ theme }) => ({
@@ -45,8 +45,8 @@ const CardStyle = styled(Card)(({ theme }) => ({
     background: theme.palette.primary[200],
     borderRadius: '50%',
     top: '-105px',
-    right: '-96px',
-  },
+    right: '-96px'
+  }
 }));
 
 // ==============================|| PROGRESS BAR WITH LABEL ||============================== //
@@ -64,10 +64,7 @@ function LinearProgressWithLabel({ value, ...others }) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              variant="h6"
-              color="inherit"
-            >{`${Math.round(value)}%`}</Typography>
+            <Typography variant="h6" color="inherit">{`${Math.round(value)}%`}</Typography>
           </Grid>
         </Grid>
       </Grid>
@@ -79,7 +76,7 @@ function LinearProgressWithLabel({ value, ...others }) {
 }
 
 LinearProgressWithLabel.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.number
 };
 
 // ==============================|| SIDEBAR MENU Card ||============================== //
@@ -102,7 +99,7 @@ const MenuCard = () => {
                   border: 'none',
                   borderColor: theme.palette.primary.main,
                   background: '#fff',
-                  marginRight: '12px',
+                  marginRight: '12px'
                 }}
               >
                 <TableChartOutlinedIcon fontSize="inherit" />
@@ -111,10 +108,7 @@ const MenuCard = () => {
             <ListItemText
               sx={{ mt: 0 }}
               primary={
-                <Typography
-                  variant="subtitle1"
-                  sx={{ color: theme.palette.primary[800] }}
-                >
+                <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
                   Get Extra Space
                 </Typography>
               }

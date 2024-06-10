@@ -8,16 +8,8 @@ export class JwtService {
   }
 
   static generateTokens(user) {
-    const accessToken = this.generateToken(
-      user.id,
-      'accessToken',
-      this.accessTokenExpiry,
-    );
-    const refreshToken = this.generateToken(
-      user.id,
-      'refreshToken',
-      this.refreshTokenExpiry,
-    );
+    const accessToken = this.generateToken(user.id, 'accessToken', this.accessTokenExpiry);
+    const refreshToken = this.generateToken(user.id, 'refreshToken', this.refreshTokenExpiry);
 
     return { accessToken, refreshToken };
   }
@@ -31,7 +23,7 @@ export class JwtService {
     return {
       userId: parts[0],
       type: parts[1],
-      expiry: parts[2],
+      expiry: parts[2]
     };
   }
 

@@ -13,7 +13,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Chip,
+  Chip
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -33,10 +33,7 @@ function createData(id, title, usedIn) {
   return { id, title, usedIn };
 }
 
-const rows = [
-  createData('1', 'Todo list', 'Create todo list'),
-  createData('2', 'Mui Snackbar', 'Create Snackbar with mui'),
-];
+const rows = [createData('1', 'Todo list', 'Create todo list'), createData('2', 'Mui Snackbar', 'Create Snackbar with mui')];
 
 const TestsList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
@@ -71,11 +68,7 @@ const TestsList = () => {
     <Box>
       <Card className={sn('card')}>
         <CardContent>
-          <Button
-            variant="outlined"
-            onClick={handleAddButtonClick}
-            className={sn('card__add-new-test')}
-          >
+          <Button variant="outlined" onClick={handleAddButtonClick} className={sn('card__add-new-test')}>
             <AddIcon className={sn('card__add-icon')} />
             Add New Test
           </Button>
@@ -93,28 +86,19 @@ const TestsList = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">
                   <Chip label={row.usedIn} className={sn('table__chip')} />
                 </TableCell>
                 <TableCell align="center">
-                  <Button
-                    className={sn('table__action-button')}
-                    onClick={() => handleEdit(row)}
-                  >
+                  <Button className={sn('table__action-button')} onClick={() => handleEdit(row)}>
                     <EditIcon />
                   </Button>
                   <Button className={sn('table__action-button')}>
                     <DeleteIcon />
                   </Button>
-                  <Button
-                    className={sn('table__action-button')}
-                    onClick={handleClick}
-                  >
+                  <Button className={sn('table__action-button')} onClick={handleClick}>
                     <MoreVertIcon />
                   </Button>
                 </TableCell>
@@ -126,7 +110,7 @@ const TestsList = () => {
                     onClose={handleClose}
                     anchorOrigin={{
                       vertical: 'bottom',
-                      horizontal: 'left',
+                      horizontal: 'left'
                     }}
                   >
                     <Paper className={sn('paper')}>

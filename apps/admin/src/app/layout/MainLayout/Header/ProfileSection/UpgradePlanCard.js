@@ -1,13 +1,6 @@
 // material-ui
 import { styled } from '@mui/material/styles';
-import {
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material';
 
 // project imports
 import AnimateButton from 'app/ui-component/extended/AnimateButton';
@@ -28,7 +21,7 @@ const CardStyle = styled(Card)(({ theme }) => ({
     borderColor: theme.palette.warning.main,
     borderRadius: '50%',
     top: '65px',
-    right: '-150px',
+    right: '-150px'
   },
   '&:before': {
     content: '""',
@@ -39,8 +32,8 @@ const CardStyle = styled(Card)(({ theme }) => ({
     borderColor: theme.palette.warning.main,
     borderRadius: '50%',
     top: '145px',
-    right: '-70px',
-  },
+    right: '-70px'
+  }
 }));
 
 // ==============================|| PROFILE MENU - UPGRADE PLAN CARD ||============================== //
@@ -53,11 +46,7 @@ const UpgradePlanCard = () => (
           <Typography variant="h4">Upgrade your plan</Typography>
         </Grid>
         <Grid item>
-          <Typography
-            variant="subtitle2"
-            color="grey.900"
-            sx={{ opacity: 0.6 }}
-          >
+          <Typography variant="subtitle2" color="grey.900" sx={{ opacity: 0.6 }}>
             70% discount for 1 years <br />
             subscriptions.
           </Typography>
@@ -65,11 +54,7 @@ const UpgradePlanCard = () => (
         <Grid item>
           <Stack direction="row">
             <AnimateButton>
-              <Button
-                variant="contained"
-                color="warning"
-                sx={{ boxShadow: 'none' }}
-              >
+              <Button variant="contained" color="warning" sx={{ boxShadow: 'none' }}>
                 Go Premium
               </Button>
             </AnimateButton>

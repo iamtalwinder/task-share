@@ -6,7 +6,7 @@ import { setUser } from './user.slice';
 const initialState = {
   success: false,
   status: APIStatusEnum.IDLE,
-  errors: []
+  errors: [],
 };
 
 export const loginSlice = createAppSlice({
@@ -34,14 +34,14 @@ export const loginSlice = createAppSlice({
         rejected: (state, actions) => {
           state.errors = actions.payload.errors;
           state.status = APIStatusEnum.FAILED;
-        }
-      }
-    )
+        },
+      },
+    ),
   }),
   selectors: {
     selectLoginError: (state) => state.errors,
-    selectLoginStatus: (state) => state.status
-  }
+    selectLoginStatus: (state) => state.status,
+  },
 });
 
 export const { submitLogin } = loginSlice.actions;

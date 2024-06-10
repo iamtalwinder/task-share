@@ -7,7 +7,7 @@ const useScriptRef = () => {
     () => () => {
       scripted.current = false;
     },
-    []
+    [],
   );
 
   return scripted;

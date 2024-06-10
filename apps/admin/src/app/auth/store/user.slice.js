@@ -3,7 +3,7 @@ import { createAppSlice } from 'app/store';
 
 const initialState = {
   user: null,
-  status: APIStatusEnum.IDLE
+  status: APIStatusEnum.IDLE,
 };
 
 export const userSlice = createAppSlice({
@@ -17,7 +17,7 @@ export const userSlice = createAppSlice({
       async (userId, { rejectWithValue }) => {
         try {
           const response = {
-            data: { id: userId, name: 'John Doe', email: 'user1@example.com' }
+            data: { id: userId, name: 'John Doe', email: 'user1@example.com' },
           }; // Mocked response
           return response.data;
         } catch (error) {
@@ -34,10 +34,10 @@ export const userSlice = createAppSlice({
         },
         rejected: (state) => {
           state.status = APIStatusEnum.FAILED;
-        }
-      }
-    )
-  })
+        },
+      },
+    ),
+  }),
 });
 
 export const { setUser } = userSlice.actions;

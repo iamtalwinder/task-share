@@ -10,8 +10,8 @@ export function makeServer({ environment = 'development' } = {}) {
     models: {
       user: Model,
       task: Model.extend({
-        userId: belongsTo('user')
-      })
+        userId: belongsTo('user'),
+      }),
     },
 
     seeds(server) {
@@ -25,7 +25,7 @@ export function makeServer({ environment = 'development' } = {}) {
 
       authRoutes.call(this);
       userRoutes.call(this);
-    }
+    },
   });
 
   return server;

@@ -8,7 +8,7 @@ export const userRoutes = function (schema, request) {
     if (!payload) {
       errors.push({
         type: 'unauthorized',
-        message: 'Invalid token'
+        message: 'Invalid token',
       });
 
       return new Response(401, {}, { errors });

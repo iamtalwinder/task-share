@@ -23,6 +23,10 @@ import { Formik } from 'formik';
 import useScriptRef from 'app/hooks/useScriptRef';
 import AnimateButton from 'app/ui-component/extended/AnimateButton';
 import { strengthColor, strengthIndicator } from 'app/utils/password-strength';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { selectRegisterError, selectRegisterStatus, submitRegister } from 'app/auth/store/register.slice';
+import { APIStatusEnum } from 'app/types';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -38,6 +42,11 @@ const FirebaseRegister = ({ ...others }) => {
 
   const [strength, setStrength] = useState(0);
   const [level, setLevel] = useState();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const registerStatus = useSelector((state) => selectRegisterStatus(state.auth));
+  const registerErrors = useSelector((state) => selectRegisterError(state.auth));
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -57,6 +66,12 @@ const FirebaseRegister = ({ ...others }) => {
     changePassword('123456');
   }, []);
 
+  useEffect(() => {
+    if (registerStatus === APIStatusEnum.SUCCESS) {
+      navigate('/login');
+    }
+  }, [registerStatus, navigate]);
+
   return (
     <>
       <Grid container direction="column" justifyContent="center" spacing={2}>
@@ -72,8 +87,7 @@ const FirebaseRegister = ({ ...others }) => {
           firstName: '',
           lastName: '',
           email: '',
-          password: '',
-          submit: null
+          password: ''
         }}
         validationSchema={Yup.object().shape({
           firstName: Yup.string().max(50).required('First Name is required'),
@@ -83,6 +97,7 @@ const FirebaseRegister = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            dispatch(submitRegister(values));
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
@@ -106,9 +121,8 @@ const FirebaseRegister = ({ ...others }) => {
                   value={values.firstName}
                   label="First Name"
                   margin="normal"
-                  name="fname"
+                  name="firstName"
                   type="text"
-                  defaultValue=""
                   onChange={handleChange}
                   sx={{ ...theme.typography.customInput }}
                 />
@@ -124,9 +138,8 @@ const FirebaseRegister = ({ ...others }) => {
                   value={values.lastName}
                   label="Last Name"
                   margin="normal"
-                  name="lname"
+                  name="lastName"
                   type="text"
-                  defaultValue=""
                   onChange={handleChange}
                   sx={{ ...theme.typography.customInput }}
                 />
@@ -227,6 +240,12 @@ const FirebaseRegister = ({ ...others }) => {
             {errors.submit && (
               <Box sx={{ mt: 3 }}>
                 <FormHelperText error>{errors.submit}</FormHelperText>
+              </Box>
+            )}
+
+            {registerErrors?.length > 0 && (
+              <Box sx={{ mt: 2 }}>
+                <FormHelperText error>{registerErrors[0].message}</FormHelperText>
               </Box>
             )}
 

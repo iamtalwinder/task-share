@@ -31,7 +31,25 @@ export function authRoutes() {
 
   this.post('/register', function (schema, request) {
     const attrs = JSON.parse(request.requestBody);
-    const user = schema.users.create({ id: Date.now(), ...attrs });
+
+    let user = schema.users.findBy({
+      email: attrs.email
+    });
+
+    const errors = [];
+
+    if (user) {
+      errors.push({
+        type: 'email_already_registered',
+        message: 'This email is already registered'
+      });
+    }
+
+    if (errors.length > 0) {
+      return new Response(400, {}, { errors });
+    }
+
+    user = schema.users.create({ id: Date.now(), ...attrs });
 
     return { user, ...JwtService.generateTokens(user) };
   });

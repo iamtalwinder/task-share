@@ -8,7 +8,7 @@ import MarkdownEditor from 'app/ui-component/text-editor/TextEditor';
 import { useParams } from 'react-router-dom';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
-import styles from './AddTask.module.scss';
+import styles from './add-task.module.scss';
 
 const sn = styleNames(styles);
 

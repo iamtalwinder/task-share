@@ -55,7 +55,7 @@ export function authRoutes() {
   });
 
   this.post('/refresh-token', function (schema, request) {
-    const payload = JwtService.decodeToken(request);
+    const payload = JwtService.validateRequest(request);
     if (!payload) {
       errors.push({
         type: 'unauthorized',

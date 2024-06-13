@@ -26,7 +26,10 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './task-list.module.scss';
-import taskDetails from '../../../../mocks/data/tasks';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserTasks, selectTasks } from '../store/tasks.slice';
 
 const sn = styleNames(styles);
 
@@ -34,6 +37,18 @@ const TaskTable = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const tasks = useSelector((state) => selectTasks(state.tasks));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserTasks())
+  }, []);
+
+  const title = location.state?.title || '';
+  const tags = location.state?.tags || '';
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,13 +100,13 @@ const TaskTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {taskDetails.map((row) => (
+            {tasks?.map((row) => (
               <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell align="center">{row.title}</TableCell>
-                <TableCell align="center">
-                  <Chip label="React" className={sn('table__chip')} />
-                  <Chip label="TypeScript" className={sn('table__chip')} />
-                  <Chip label="Redux Toolkit" />
+                <TableCell align="center">{title}</TableCell>
+                <TableCell>
+                  {tags && tags.map((tag, index) => (
+                    <Chip key={index} label={tag} className={sn('table__chip')} />
+                  ))}
                 </TableCell>
                 <TableCell align="center">
                   <Chip label={row.status} className={sn('table__chip')} />

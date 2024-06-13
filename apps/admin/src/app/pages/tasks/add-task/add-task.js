@@ -36,8 +36,8 @@ const AddTask = () => {
         title: values.title,
         tags: values.tags,
       }));
-      console.log('values',values)
-      navigate('/tasks');
+      console.log('values', values)
+      navigate('/tasks', { state: { title: values.title, tags: values.tags }});
     }
   });
 

@@ -14,9 +14,25 @@ export class JwtService {
     return { accessToken, refreshToken };
   }
 
+  static validateRequest(request) {
+    const authHeader = request.requestHeaders['Authorization'];
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+
+      if (this.validateToken(token)) {
+        return JwtService.decodeToken(token);
+      }
+
+      return null;
+    }
+
+    return null;
+  }
+
   static decodeToken(token) {
-    const parts = token.split('|');
-    if (parts.length !== 3) {
+    const parts = token?.split('|');
+    if (!parts || parts.length !== 3) {
       return null; // Invalid token format
     }
 

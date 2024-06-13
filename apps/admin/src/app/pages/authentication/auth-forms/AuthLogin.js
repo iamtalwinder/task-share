@@ -24,7 +24,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { selectLoginError, selectLoginStatus, submitLogin } from 'app/auth/store/login.slice';
-import { APIStatusEnum } from 'app/types';
+import { authService } from 'app/services';
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
@@ -38,7 +38,7 @@ const FirebaseLogin = ({ ...others }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginStatus === APIStatusEnum.SUCCESS) {
+    if (authService.isSessionValid()) {
       navigate('/tasks');
     }
   }, [loginStatus, navigate]);

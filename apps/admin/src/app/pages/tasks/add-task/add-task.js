@@ -9,12 +9,16 @@ import { useParams } from 'react-router-dom';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './add-task.module.scss';
+import { useDispatch } from 'react-redux';
+import { addNewTask } from '../store/tasks.slice';
+
 
 const sn = styleNames(styles);
 
 const AddTask = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
@@ -28,7 +32,12 @@ const AddTask = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(addNewTask({
+        title: values.title,
+        tags: values.tags,
+      }));
+      console.log('values',values)
+      navigate('/tasks');
     }
   });
 

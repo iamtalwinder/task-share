@@ -25,20 +25,10 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
-
 import styles from './task-list.module.scss';
+import taskDetails from '../../../../mocks/data/tasks';
 
 const sn = styleNames(styles);
-
-function createData(id, title, status) {
-  return { id, title, status };
-}
-
-const rows = [
-  createData('1', 'Create todo list', 'used'),
-  createData('2', 'Create user form using redux', 'not used'),
-  createData('3', 'Create Snackbar with mui', 'used')
-];
 
 const TaskTable = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
@@ -95,7 +85,7 @@ const TaskTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {taskDetails.map((row) => (
               <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{row.title}</TableCell>
                 <TableCell align="center">

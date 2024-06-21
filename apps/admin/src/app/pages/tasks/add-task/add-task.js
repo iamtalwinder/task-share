@@ -10,7 +10,7 @@ import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './add-task.module.scss';
 import { useDispatch } from 'react-redux';
-import { addNewTask } from '../store/tasks.slice';
+import { createTask } from '../store/tasks.slice';
 
 
 const sn = styleNames(styles);
@@ -32,12 +32,12 @@ const AddTask = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(addNewTask({
+      dispatch(createTask({
         title: values.title,
         tags: values.tags,
       }));
-      console.log('values', values)
-      navigate('/tasks', { state: { title: values.title, tags: values.tags }});
+      
+      navigate('/tasks');
     }
   });
 

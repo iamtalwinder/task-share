@@ -5,6 +5,7 @@ import { taskService } from 'app/services';
 const initialState = {
   tasks: [],
   listStatus: APIStatusEnum.IDLE,
+  createTaskStatus: APIStatusEnum.IDLE,
 }
 
 export const taskSlice = createAppSlice({
@@ -14,20 +15,45 @@ export const taskSlice = createAppSlice({
     setTasks: create.reducer((state, action) => {
       state.tasks = action.payload;
     }),
-    addNewTask: create.reducer((state, action) => {
-      state.tasks.push(action.payload)
-    }),
+    createTask: create.asyncThunk(
+      async (task, { rejectWithValue }) => {
+        try {
+          const newTask = await taskService.createTask(task);
+          return newTask;
+        } catch (error) {
+          return rejectWithValue('Failed to add new task');
+        }
+      },
+      {
+        pending: (state) => {
+          state.createTaskStatus = APIStatusEnum.LOADING;
+        },
+        fulfilled: (state, action) => {
+          state.createTaskStatus = APIStatusEnum.SUCCESS;
+          state.tasks.push(action.payload);
+        },
+        rejected: (state) => {
+          state.createTaskStatus = APIStatusEnum.FAILED;
+        }
+      }
+    ),
     getUserTasks: create.asyncThunk(
-      async (data, { dispatch }) => {
-        const tasks = await taskService.getTasks();
-        dispatch(setTasks(tasks));
+      async (_, { rejectWithValue }) => {
+        try {
+          const tasks = await taskService.getTasks();
+          return tasks;
+        }
+        catch (error) {
+          rejectWithValue('Failed to load the users')
+        }
       },
       {
         pending: (state) => {
           state.listStatus = APIStatusEnum.LOADING;
         },
-        fulfilled: (state) => {
+        fulfilled: (state, action) => {
           state.listStatus = APIStatusEnum.SUCCESS;
+          state.tasks = action.payload;
         },
         rejected: (state) => {
           state.listStatus = APIStatusEnum.FAILED;
@@ -41,7 +67,7 @@ export const taskSlice = createAppSlice({
   }
 })
 
-export const { setTasks, getUserTasks, addNewTask } = taskSlice.actions;
+export const { setTasks, getUserTasks, createTask } = taskSlice.actions;
 export const { selectListStatus, selectTasks } = taskSlice.selectors;
 
 

@@ -2,8 +2,12 @@ import { lazy } from 'react';
 import MainLayout from 'app/layout/MainLayout';
 import Loadable from 'app/ui-component/Loadable';
 
-const TaskDefault = Loadable(lazy(() => import('app/pages/tasks/list/task-list')));
-const AddTaskDefault = Loadable(lazy(() => import('app/pages/tasks/add-task/add-task')));
+const TaskDefault = Loadable(
+  lazy(() => import('app/pages/tasks/list/task-list')),
+);
+const AddTaskDefault = Loadable(
+  lazy(() => import('app/pages/tasks/add-task/add-task')),
+);
 const ViewTask = Loadable(lazy(() => import('app/pages/view-task/ViewTask')));
 const TestList = Loadable(lazy(() => import('app/pages/tests/TestsList')));
 const AddTest = Loadable(lazy(() => import('app/pages/add-test/AddTest')));
@@ -17,7 +21,7 @@ const MainRoutes = {
     {
       path: '/tasks',
       default: true,
-      element: <TaskDefault />
+      element: <TaskDefault />,
     },
     // {
     //   path: 'dashboard',
@@ -30,29 +34,29 @@ const MainRoutes = {
     // },
     {
       path: '/task/add',
-      element: <AddTaskDefault />
+      element: <AddTaskDefault />,
     },
     {
       path: '/task/:id/edit',
-      element: <AddTaskDefault />
+      element: <AddTaskDefault />,
     },
     {
       path: '/task/:id/view',
-      element: <ViewTask />
+      element: <ViewTask />,
     },
     {
       path: '/tests',
-      element: <TestList />
+      element: <TestList />,
     },
     {
       path: '/test/add',
-      element: <AddTest />
+      element: <AddTest />,
     },
     {
       path: '/test/:id/edit',
-      element: <AddTest />
-    }
-  ]
+      element: <AddTest />,
+    },
+  ],
 };
 
 export default MainRoutes;

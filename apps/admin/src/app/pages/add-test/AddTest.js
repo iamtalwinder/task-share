@@ -1,5 +1,13 @@
 import React from 'react';
-import { Button, Grid, Card, Box, CardContent, Typography, TextField } from '@mui/material';
+import {
+  Button,
+  Grid,
+  Card,
+  Box,
+  CardContent,
+  Typography,
+  TextField,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -18,18 +26,18 @@ const AddTest = () => {
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    task: yup.array().min(1, 'At least one task is required')
+    task: yup.array().min(1, 'At least one task is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      task: []
+      task: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
 
   const handleCancel = () => {
@@ -40,7 +48,7 @@ const AddTest = () => {
     if (id) {
       formik.setValues({
         title: 'Todo List',
-        task: ['Create todo list', '', 'Snackbar with mui']
+        task: ['Create todo list', '', 'Snackbar with mui'],
       });
     }
   }, [id, formik]);
@@ -50,14 +58,27 @@ const AddTest = () => {
       <Card>
         <CardContent>
           <Box className={sn('new-test')}>
-            <Typography variant="h5" component="div" className={sn('new-test__title')}>
+            <Typography
+              variant="h5"
+              component="div"
+              className={sn('new-test__title')}
+            >
               {id ? 'Edit Test' : 'Add New test'}
             </Typography>
             <Box>
-              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-test__cancel-btn')}>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleCancel}
+                className={sn('new-test__cancel-btn')}
+              >
                 Cancel
               </Button>
-              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-test__add-btn')}>
+              <Button
+                variant="contained"
+                onClick={formik.handleSubmit}
+                className={sn('new-test__add-btn')}
+              >
                 {id ? 'Edit Test' : 'Add New Test'}
               </Button>
             </Box>

@@ -6,7 +6,7 @@ const initialState = {
   tasks: [],
   listStatus: APIStatusEnum.IDLE,
   createTaskStatus: APIStatusEnum.IDLE,
-}
+};
 
 export const taskSlice = createAppSlice({
   name: 'tasks',
@@ -34,17 +34,16 @@ export const taskSlice = createAppSlice({
         },
         rejected: (state) => {
           state.createTaskStatus = APIStatusEnum.FAILED;
-        }
-      }
+        },
+      },
     ),
     getUserTasks: create.asyncThunk(
       async (_, { rejectWithValue }) => {
         try {
           const tasks = await taskService.getTasks();
           return tasks;
-        }
-        catch (error) {
-          rejectWithValue('Failed to load the users')
+        } catch (error) {
+          rejectWithValue('Failed to load the users');
         }
       },
       {
@@ -57,18 +56,17 @@ export const taskSlice = createAppSlice({
         },
         rejected: (state) => {
           state.listStatus = APIStatusEnum.FAILED;
-        }
-      }
-    )
+        },
+      },
+    ),
   }),
   selectors: {
     selectListStatus: (state) => state.listStatus,
-    selectTasks: (state) => state.tasks
-  }
-})
+    selectTasks: (state) => state.tasks,
+  },
+});
 
 export const { setTasks, getUserTasks, createTask } = taskSlice.actions;
 export const { selectListStatus, selectTasks } = taskSlice.selectors;
-
 
 export default taskSlice.reducer;

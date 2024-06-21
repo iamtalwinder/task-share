@@ -6,7 +6,7 @@ import taskReducer from '../pages/tasks/store/tasks.slice';
 const reducer = combineReducers({
   auth: authReducer,
   tasks: taskReducer,
-  customization: customizationReducer
+  customization: customizationReducer,
 });
 
 export default reducer;

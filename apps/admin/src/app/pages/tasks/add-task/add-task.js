@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, Grid, Card, Box, CardContent, Typography, TextField, Divider } from '@mui/material';
+import {
+  Button,
+  Grid,
+  Card,
+  Box,
+  CardContent,
+  Typography,
+  TextField,
+  Divider,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -12,7 +21,6 @@ import styles from './add-task.module.scss';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../store/tasks.slice';
 
-
 const sn = styleNames(styles);
 
 const AddTask = () => {
@@ -22,23 +30,25 @@ const AddTask = () => {
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    tags: yup.array().min(1, 'At least one tag is required')
+    tags: yup.array().min(1, 'At least one tag is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      tags: []
+      tags: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(createTask({
-        title: values.title,
-        tags: values.tags,
-      }));
-      
+      dispatch(
+        createTask({
+          title: values.title,
+          tags: values.tags,
+        }),
+      );
+
       navigate('/tasks');
-    }
+    },
   });
 
   const handleCancel = () => {
@@ -49,7 +59,7 @@ const AddTask = () => {
     if (id) {
       formik.setValues({
         title: 'Create todo list',
-        tags: ['React', 'TypeScript']
+        tags: ['React', 'TypeScript'],
       });
     }
   }, [id, formik]);
@@ -59,14 +69,27 @@ const AddTask = () => {
       <Card>
         <CardContent>
           <Box className={sn('new-task')}>
-            <Typography variant="h5" component="div" className={sn('new-task__title')}>
+            <Typography
+              variant="h5"
+              component="div"
+              className={sn('new-task__title')}
+            >
               {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
-              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-task__cancel-btn')}>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleCancel}
+                className={sn('new-task__cancel-btn')}
+              >
                 Cancel
               </Button>
-              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-task__add-btn')}>
+              <Button
+                variant="contained"
+                onClick={formik.handleSubmit}
+                className={sn('new-task__add-btn')}
+              >
                 {id ? 'Edit Task' : 'Add Task'}
               </Button>
             </Box>

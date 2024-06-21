@@ -8,7 +8,7 @@ const makeStore = (preloadedState) => {
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware().concat();
     },
-    preloadedState
+    preloadedState,
   });
 
   return store;

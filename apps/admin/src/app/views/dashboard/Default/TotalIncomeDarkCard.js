@@ -2,7 +2,15 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 
 // project imports
 import MainCard from 'app/ui-component/cards/MainCard';
@@ -25,7 +33,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     background: `linear-gradient(210.04deg, ${theme.palette.primary[200]} -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
     borderRadius: '50%',
     top: -30,
-    right: -180
+    right: -180,
   },
   '&:before': {
     content: '""',
@@ -35,8 +43,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     background: `linear-gradient(140.9deg, ${theme.palette.primary[200]} -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
     borderRadius: '50%',
     top: -160,
-    right: -130
-  }
+    right: -130,
+  },
 }));
 
 // ==============================|| DASHBOARD - TOTAL INCOME DARK CARD ||============================== //
@@ -60,7 +68,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                       ...theme.typography.commonAvatar,
                       ...theme.typography.largeAvatar,
                       backgroundColor: theme.palette.primary[800],
-                      color: '#fff'
+                      color: '#fff',
                     }}
                   >
                     <TableChartOutlinedIcon fontSize="inherit" />
@@ -70,7 +78,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                   sx={{
                     py: 0,
                     mt: 0.45,
-                    mb: 0.45
+                    mb: 0.45,
                   }}
                   primary={
                     <Typography variant="h4" sx={{ color: '#fff' }}>
@@ -78,7 +86,10 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                     </Typography>
                   }
                   secondary={
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ color: 'primary.light', mt: 0.25 }}
+                    >
                       Total Income
                     </Typography>
                   }
@@ -93,7 +104,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
 };
 
 TotalIncomeDarkCard.propTypes = {
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export default TotalIncomeDarkCard;

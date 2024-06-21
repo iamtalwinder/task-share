@@ -13,7 +13,7 @@ class AuthService {
           EventDispatcher.dispatchUnauthorized();
         }
         return Promise.reject(error);
-      }
+      },
     );
   }
 
@@ -34,7 +34,7 @@ class AuthService {
   }
 
   isSessionValid() {
-    const {accessToken, refreshToken} = this.getTokenFromStorage();
+    const { accessToken, refreshToken } = this.getTokenFromStorage();
     return accessToken && refreshToken;
   }
 
@@ -42,11 +42,11 @@ class AuthService {
     const accessToken = localStorage.getItem(JWT_ACCESS_TOKEN_KEY);
     const refreshToken = localStorage.getItem(JWT_REFRESH_TOKEN_KEY);
 
-    return {accessToken, refreshToken};
+    return { accessToken, refreshToken };
   }
 
   setDefaultHeaders() {
-    const {accessToken, refreshToken} = this.getTokenFromStorage();
+    const { accessToken, refreshToken } = this.getTokenFromStorage();
 
     if (accessToken && refreshToken) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;

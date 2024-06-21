@@ -9,13 +9,13 @@ const AuthenticationRoutes = {
   children: [
     {
       path: '/login',
-      element: <AuthLogin />
+      element: <AuthLogin />,
     },
     {
       path: '/register',
-      element: <AuthRegister />
-    }
-  ]
+      element: <AuthRegister />,
+    },
+  ],
 };
 
 export default AuthenticationRoutes;

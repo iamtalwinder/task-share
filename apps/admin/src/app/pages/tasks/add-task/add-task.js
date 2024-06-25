@@ -31,12 +31,14 @@ const AddTask = () => {
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
     tags: yup.array().min(1, 'At least one tag is required'),
+    description: yup.string().required('Description is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
       tags: [],
+      description: ''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -44,6 +46,7 @@ const AddTask = () => {
         createTask({
           title: values.title,
           tags: values.tags,
+          description: values.description
         }),
       );
 
@@ -60,6 +63,7 @@ const AddTask = () => {
       formik.setValues({
         title: 'Create todo list',
         tags: ['React', 'TypeScript'],
+        description: '',
       });
     }
   }, [id, formik]);
@@ -129,7 +133,16 @@ const AddTask = () => {
           <Divider className={sn('card__divider')} />
           <Box>
             <Typography sx={{ fontSize: 24 }}>Description</Typography>
-            <MarkdownEditor />
+            <MarkdownEditor
+              name="description"
+              value={formik.values.description}
+              onChange={(name, value) => formik.setFieldValue(name, value)}
+            />
+            {formik.touched.description && formik.errors.description && (
+              <Typography color="error">
+                {formik.errors.description}
+              </Typography>
+            )}
           </Box>
         </CardContent>
       </Card>

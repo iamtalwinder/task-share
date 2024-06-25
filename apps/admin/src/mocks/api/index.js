@@ -12,7 +12,7 @@ export function makeServer({ environment = 'development' } = {}) {
 
     models: {
       user: Model,
-      task: Model,
+      task: Model
     },
 
     seeds(server) {
@@ -31,7 +31,7 @@ export function makeServer({ environment = 'development' } = {}) {
       authRoutes.call(this);
       userRoutes.call(this);
       taskRoutes.call(this);
-    },
+    }
   });
 
   return server;

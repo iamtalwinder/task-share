@@ -10,7 +10,7 @@ export const withErrorBoundary = (WrappedComponent) => {
   );
 
   WithErrorBoundary.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
   };
 
   return WithErrorBoundary;

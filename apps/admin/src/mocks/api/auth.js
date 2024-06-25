@@ -7,7 +7,7 @@ export function authRoutes() {
     const attrs = JSON.parse(request.requestBody);
     const user = schema.users.findBy({
       email: attrs.email,
-      password: attrs.password,
+      password: attrs.password
     });
 
     const errors = [];
@@ -15,14 +15,14 @@ export function authRoutes() {
     if (!user) {
       errors.push({
         type: 'invalid_credentials',
-        message: 'Invalid credentials, check your email & password',
+        message: 'Invalid credentials, check your email & password'
       });
     }
 
     if (errors.length === 0) {
       return {
         user,
-        ...JwtService.generateTokens(user),
+        ...JwtService.generateTokens(user)
       };
     }
 
@@ -33,7 +33,7 @@ export function authRoutes() {
     const attrs = JSON.parse(request.requestBody);
 
     let user = schema.users.findBy({
-      email: attrs.email,
+      email: attrs.email
     });
 
     const errors = [];
@@ -41,7 +41,7 @@ export function authRoutes() {
     if (user) {
       errors.push({
         type: 'email_already_registered',
-        message: 'This email is already registered',
+        message: 'This email is already registered'
       });
     }
 
@@ -59,7 +59,7 @@ export function authRoutes() {
     if (!payload) {
       errors.push({
         type: 'unauthorized',
-        message: 'Invalid token',
+        message: 'Invalid token'
       });
 
       return new Response(401, {}, { errors });

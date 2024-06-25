@@ -11,9 +11,9 @@ export function userRoutes() {
         {
           errors: {
             type: 'unauthorized',
-            message: 'Invalid token',
-          },
-        },
+            message: 'Invalid token'
+          }
+        }
       );
     }
 

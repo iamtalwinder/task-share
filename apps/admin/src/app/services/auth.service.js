@@ -13,7 +13,7 @@ class AuthService {
           EventDispatcher.dispatchUnauthorized();
         }
         return Promise.reject(error);
-      },
+      }
     );
   }
 

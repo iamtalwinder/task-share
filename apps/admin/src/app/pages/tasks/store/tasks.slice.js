@@ -5,7 +5,7 @@ import { taskService } from 'app/services';
 const initialState = {
   tasks: [],
   listStatus: APIStatusEnum.IDLE,
-  createTaskStatus: APIStatusEnum.IDLE,
+  createTaskStatus: APIStatusEnum.IDLE
 };
 
 export const taskSlice = createAppSlice({
@@ -34,8 +34,8 @@ export const taskSlice = createAppSlice({
         },
         rejected: (state) => {
           state.createTaskStatus = APIStatusEnum.FAILED;
-        },
-      },
+        }
+      }
     ),
     getUserTasks: create.asyncThunk(
       async (_, { rejectWithValue }) => {
@@ -56,14 +56,14 @@ export const taskSlice = createAppSlice({
         },
         rejected: (state) => {
           state.listStatus = APIStatusEnum.FAILED;
-        },
-      },
-    ),
+        }
+      }
+    )
   }),
   selectors: {
     selectListStatus: (state) => state.listStatus,
-    selectTasks: (state) => state.tasks,
-  },
+    selectTasks: (state) => state.tasks
+  }
 });
 
 export const { setTasks, getUserTasks, createTask } = taskSlice.actions;

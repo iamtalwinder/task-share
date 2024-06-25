@@ -11,9 +11,9 @@ export function taskRoutes() {
         {
           errors: {
             type: 'unauthorized',
-            message: 'Invalid token',
-          },
-        },
+            message: 'Invalid token'
+          }
+        }
       );
     }
 
@@ -29,16 +29,16 @@ export function taskRoutes() {
         {
           errors: {
             type: 'unauthorized',
-            message: 'Invalid token',
-          },
-        },
+            message: 'Invalid token'
+          }
+        }
       );
     }
 
     const taskData = {
       ...JSON.parse(request.requestBody),
       userId: payload.userId,
-      status: 'not-used',
+      status: 'not-used'
     };
     const newTask = schema.tasks.create(taskData);
 

@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Grid,
-  Card,
-  Box,
-  CardContent,
-  Typography,
-  TextField,
-  Divider,
-} from '@mui/material';
+import { Button, Grid, Card, Box, CardContent, Typography, TextField, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -31,7 +22,7 @@ const AddTask = () => {
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
     tags: yup.array().min(1, 'At least one tag is required'),
-    description: yup.string().required('Description is required'),
+    description: yup.string().required('Description is required')
   });
 
   const formik = useFormik({
@@ -47,11 +38,11 @@ const AddTask = () => {
           title: values.title,
           tags: values.tags,
           description: values.description
-        }),
+        })
       );
 
       navigate('/tasks');
-    },
+    }
   });
 
   const handleCancel = () => {
@@ -63,7 +54,7 @@ const AddTask = () => {
       formik.setValues({
         title: 'Create todo list',
         tags: ['React', 'TypeScript'],
-        description: '',
+        description: ''
       });
     }
   }, [id, formik]);
@@ -73,27 +64,14 @@ const AddTask = () => {
       <Card>
         <CardContent>
           <Box className={sn('new-task')}>
-            <Typography
-              variant="h5"
-              component="div"
-              className={sn('new-task__title')}
-            >
+            <Typography variant="h5" component="div" className={sn('new-task__title')}>
               {id ? 'Edit Task' : 'Add New Task'}
             </Typography>
             <Box>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={handleCancel}
-                className={sn('new-task__cancel-btn')}
-              >
+              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-task__cancel-btn')}>
                 Cancel
               </Button>
-              <Button
-                variant="contained"
-                onClick={formik.handleSubmit}
-                className={sn('new-task__add-btn')}
-              >
+              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-task__add-btn')}>
                 {id ? 'Edit Task' : 'Add Task'}
               </Button>
             </Box>
@@ -138,11 +116,7 @@ const AddTask = () => {
               value={formik.values.description}
               onChange={(name, value) => formik.setFieldValue(name, value)}
             />
-            {formik.touched.description && formik.errors.description && (
-              <Typography color="error">
-                {formik.errors.description}
-              </Typography>
-            )}
+            {formik.touched.description && formik.errors.description && <Typography color="error">{formik.errors.description}</Typography>}
           </Box>
         </CardContent>
       </Card>

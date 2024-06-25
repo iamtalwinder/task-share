@@ -6,7 +6,7 @@ import { setUser } from './user.slice';
 const initialState = {
   success: false,
   status: APIStatusEnum.IDLE,
-  errors: [],
+  errors: []
 };
 
 export const registerSlice = createAppSlice({
@@ -34,18 +34,17 @@ export const registerSlice = createAppSlice({
         rejected: (state, action) => {
           state.errors = action.payload.errors;
           state.status = APIStatusEnum.FAILED;
-        },
-      },
-    ),
+        }
+      }
+    )
   }),
   selectors: {
     selectRegisterError: (state) => state.errors,
-    selectRegisterStatus: (state) => state.status,
-  },
+    selectRegisterStatus: (state) => state.status
+  }
 });
 
 export const { submitRegister } = registerSlice.actions;
-export const { selectRegisterError, selectRegisterStatus } =
-  registerSlice.selectors;
+export const { selectRegisterError, selectRegisterStatus } = registerSlice.selectors;
 
 export default registerSlice.reducer;

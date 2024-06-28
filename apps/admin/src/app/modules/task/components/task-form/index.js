@@ -4,31 +4,34 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MuiChipsInput } from 'mui-chips-input';
+
 import MarkdownEditor from 'app/ui-component/text-editor/TextEditor';
-import { useParams } from 'react-router-dom';
 import { styleNames } from 'libs/style-names';
-import { withErrorBoundary } from 'libs/error-boundary';
-import styles from './AddTask.module.scss';
+import styles from './task-form.module.scss';
 
 const sn = styleNames(styles);
 
-const AddTask = () => {
+export const TaskForm = (props) => {
+  const {task, handleSubmit, isEditing = false} = props;
+
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    tags: yup.array().min(1, 'At least one tag is required')
+    tags: yup.array().min(1, 'At least one tag is required'),
+    description: yup.string().required('Description is required')
   });
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      tags: []
+      title: task?.title || '',
+      tags: task?.tags || [],
+      description: task?.description || ''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      handleSubmit(values);
+      navigate('/tasks');
     }
   });
 
@@ -36,29 +39,20 @@ const AddTask = () => {
     navigate('/tasks');
   };
 
-  React.useEffect(() => {
-    if (id) {
-      formik.setValues({
-        title: 'Create todo list',
-        tags: ['React', 'TypeScript']
-      });
-    }
-  }, [id, formik]);
-
   return (
     <Box>
       <Card>
         <CardContent>
-          <Box className={sn('new-task')}>
-            <Typography variant="h5" component="div" className={sn('new-task__title')}>
-              {id ? 'Edit Task' : 'Add New Task'}
+          <Box className={sn('header')}>
+            <Typography variant="h5" component="div" className={sn('header__title')}>
+              {isEditing ? 'Update' : 'Create'}
             </Typography>
             <Box>
-              <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-task__cancel-btn')}>
+              <Button variant="contained" color="error" onClick={handleCancel} className={sn('header__cancel-btn')}>
                 Cancel
               </Button>
-              <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-task__add-btn')}>
-                {id ? 'Edit Task' : 'Add Task'}
+              <Button variant="contained" onClick={formik.handleSubmit} className={sn('header__add-btn')}>
+                {isEditing ? 'Update' : 'Create'}
               </Button>
             </Box>
           </Box>
@@ -97,12 +91,15 @@ const AddTask = () => {
           <Divider className={sn('card__divider')} />
           <Box>
             <Typography sx={{ fontSize: 24 }}>Description</Typography>
-            <MarkdownEditor />
+            <MarkdownEditor
+              name="description"
+              value={formik.values.description}
+              onChange={(name, value) => formik.setFieldValue(name, value)}
+            />
+            {formik.touched.description && formik.errors.description && <Typography color="error">{formik.errors.description}</Typography>}
           </Box>
         </CardContent>
       </Card>
     </Box>
   );
 };
-
-export default withErrorBoundary(AddTask);

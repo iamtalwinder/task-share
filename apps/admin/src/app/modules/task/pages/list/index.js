@@ -25,25 +25,24 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import DownloadIcon from '@mui/icons-material/Download';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
-
-import styles from './Tasks.module.scss';
+import styles from './task-list.module.scss';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserTasks, selectTasks } from '../../store/tasks.slice';
 
 const sn = styleNames(styles);
 
-function createData(id, title, status) {
-  return { id, title, status };
-}
-
-const rows = [
-  createData('1', 'Create todo list', 'used'),
-  createData('2', 'Create user form using redux', 'not used'),
-  createData('3', 'Create Snackbar with mui', 'used')
-];
-
-const TaskTable = () => {
+const TaskList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
+
+  const tasks = useSelector(selectTasks);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserTasks());
+  }, [dispatch]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -95,13 +94,11 @@ const TaskTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {tasks?.map((row) => (
               <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{row.title}</TableCell>
-                <TableCell align="center">
-                  <Chip label="React" className={sn('table__chip')} />
-                  <Chip label="TypeScript" className={sn('table__chip')} />
-                  <Chip label="Redux Toolkit" />
+                <TableCell>
+                  {row.tags && row.tags.map((tag, index) => <Chip key={index} label={tag} className={sn('table__chip')} />)}
                 </TableCell>
                 <TableCell align="center">
                   <Chip label={row.status} className={sn('table__chip')} />
@@ -152,4 +149,4 @@ const TaskTable = () => {
   );
 };
 
-export default withErrorBoundary(TaskTable);
+export default withErrorBoundary(TaskList);

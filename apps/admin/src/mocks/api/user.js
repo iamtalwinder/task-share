@@ -1,19 +1,22 @@
 import { Response } from 'miragejs';
 import { JwtService } from '../service/jwt.service';
 
-export const userRoutes = function (schema, request) {
-  this.get('/user-profile', () => {
-    0;
-    const payload = JwtService.decodeToken(request);
+export function userRoutes() {
+  this.get('/user-profile', function (schema, request) {
+    const payload = JwtService.validateRequest(request);
     if (!payload) {
-      errors.push({
-        type: 'unauthorized',
-        message: 'Invalid token'
-      });
-
-      return new Response(401, {}, { errors });
+      return new Response(
+        401,
+        {},
+        {
+          errors: {
+            type: 'unauthorized',
+            message: 'Invalid token'
+          }
+        }
+      );
     }
 
     return schema.users.findBy({ id: payload.userId });
   });
-};
+}

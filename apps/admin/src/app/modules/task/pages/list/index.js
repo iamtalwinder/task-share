@@ -28,11 +28,11 @@ import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './task-list.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTasks, selectTasks } from '../store/tasks.slice';
+import { getUserTasks, selectTasks } from '../../store/tasks.slice';
 
 const sn = styleNames(styles);
 
-const TaskTable = () => {
+const TaskList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -149,4 +149,4 @@ const TaskTable = () => {
   );
 };
 
-export default withErrorBoundary(TaskTable);
+export default withErrorBoundary(TaskList);

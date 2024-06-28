@@ -2,11 +2,11 @@ import { lazy } from 'react';
 import MainLayout from 'app/layout/MainLayout';
 import Loadable from 'app/ui-component/Loadable';
 
-const TaskDefault = Loadable(lazy(() => import('app/pages/tasks/list/task-list')));
-const AddTaskDefault = Loadable(lazy(() => import('app/pages/tasks/add-task/add-task')));
-const ViewTask = Loadable(lazy(() => import('app/pages/view-task/ViewTask')));
-const TestList = Loadable(lazy(() => import('app/pages/tests/TestsList')));
-const AddTest = Loadable(lazy(() => import('app/pages/add-test/AddTest')));
+const TaskDefault = Loadable(lazy(() => import('app/modules/task/pages/list')));
+const AddTask = Loadable(lazy(() => import('app/modules/task/pages/add')));
+const ViewTask = Loadable(lazy(() => import('app/modules/view-task/ViewTask')));
+const TestList = Loadable(lazy(() => import('app/modules/tests/TestsList')));
+const AddTest = Loadable(lazy(() => import('app/modules/add-test/AddTest')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -30,11 +30,11 @@ const MainRoutes = {
     // },
     {
       path: '/task/add',
-      element: <AddTaskDefault />
+      element: <AddTask />
     },
     {
       path: '/task/:id/edit',
-      element: <AddTaskDefault />
+      element: <AddTask />
     },
     {
       path: '/task/:id/view',

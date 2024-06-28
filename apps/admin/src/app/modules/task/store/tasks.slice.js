@@ -37,6 +37,32 @@ export const taskSlice = createAppSlice({
         }
       }
     ),
+    getTask: create.asyncThunk(
+      async (id , { rejectWithValue }) => {
+        try {
+          const updatedTask = await taskService.getTaskById(id);
+          return updatedTask;
+        } catch (error) {
+          return rejectWithValue('Failed to update the task');
+        }
+      },
+      {
+        pending: (state) => {
+          state.createTaskStatus = APIStatusEnum.LOADING;
+        },
+        fulfilled: (state, action) => {
+          state.createTaskStatus = APIStatusEnum.SUCCESS;
+          const index = state.tasks.findIndex((task) => task.id === action.payload.id)
+
+          if (index !== -1) {
+            state.tasks[index] = action.payload;
+          }
+        },
+        rejected: (state) => {
+          state.createTaskStatus = APIStatusEnum.FAILED;
+        }
+      }
+    ),
     getUserTasks: create.asyncThunk(
       async (_, { rejectWithValue }) => {
         try {
@@ -66,7 +92,7 @@ export const taskSlice = createAppSlice({
   }
 });
 
-export const { setTasks, getUserTasks, createTask } = taskSlice.actions;
+export const { setTasks, getUserTasks, createTask, getTask } = taskSlice.actions;
 export const { selectListStatus, selectTasks } = taskSlice.selectors;
 
 export default taskSlice.reducer;

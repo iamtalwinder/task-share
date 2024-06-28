@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { styleNames } from 'libs/style-names';
-import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './MarkdownEditor.module.scss';
 
 const sn = styleNames(styles);
@@ -41,4 +40,4 @@ const MarkdownEditor = ({ value, onChange, name }) => {
   );
 };
 
-export default withErrorBoundary(MarkdownEditor);
+export default MarkdownEditor;

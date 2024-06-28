@@ -44,4 +44,45 @@ export function taskRoutes() {
 
     return new Response(201, {}, newTask);
   });
+
+  this.get('/task/:id', function (schema, request) {
+    const payload = JwtService.validateRequest(request);
+
+    if (!payload) {
+      return new Response(
+        401,
+        {},
+        {
+          errors: {
+            type: 'unauthorized',
+            message: 'Invalid token'
+          }
+        }
+      );
+    }
+
+    const id = request.params.id;
+    return schema.tasks.find(id);
+  });
+
+  this.put('/task/:id', function (schema, request) {
+    const payload = JwtService.validateRequest(request);
+
+    if (!payload) {
+      return new Response(
+        401,
+        {},
+        {
+          errors: {
+            type: 'unauthorized',
+            message: 'Invalid token'
+          }
+        }
+      );
+    }
+
+    const id = request.params.id;
+    const attrs = this.normalizedRequestAttrs();
+    return schema.tasks.find(id).update(attrs);
+  });
 }

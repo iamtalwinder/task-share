@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import Loadable from 'app/ui-component/Loadable';
 
-const AuthLogin = Loadable(lazy(() => import('app/pages/auth/Login')));
-const AuthRegister = Loadable(lazy(() => import('app/pages/auth/Register')));
+const AuthLogin = Loadable(lazy(() => import('app/modules/auth/Login')));
+const AuthRegister = Loadable(lazy(() => import('app/modules/auth/Register')));
 
 const AuthenticationRoutes = {
   path: '/',

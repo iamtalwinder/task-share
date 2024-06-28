@@ -1,4 +1,4 @@
-export const tasks = [
+export const userTasks = [
   {
     id: 1,
     title: 'Create todo list 1',

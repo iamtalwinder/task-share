@@ -1,6 +1,5 @@
 import { createServer, Model } from 'miragejs';
-import { users } from '../data/users';
-import { tasks } from '../data/tasks';
+import { users, userTasks } from '../data';
 
 import { authRoutes } from './auth';
 import { userRoutes } from './user';
@@ -20,7 +19,7 @@ export function makeServer({ environment = 'development' } = {}) {
         server.create('user', user);
       });
 
-      tasks.forEach((task) => {
+      userTasks.forEach((task) => {
         server.create('task', task);
       });
     },

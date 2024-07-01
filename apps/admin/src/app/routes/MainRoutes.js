@@ -7,6 +7,7 @@ const AddTask = Loadable(lazy(() => import('app/modules/task/pages/add')));
 const ViewTask = Loadable(lazy(() => import('app/modules/view-task/ViewTask')));
 const TestList = Loadable(lazy(() => import('app/modules/tests/TestsList')));
 const AddTest = Loadable(lazy(() => import('app/modules/add-test/AddTest')));
+const EditTask = Loadable(lazy(() => import('app/modules/task/pages/update')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -33,8 +34,8 @@ const MainRoutes = {
       element: <AddTask />
     },
     {
-      path: '/task/:id/edit',
-      element: <AddTask />
+      path: '/task/:taskId/edit',
+      element: <EditTask />
     },
     {
       path: '/task/:id/view',

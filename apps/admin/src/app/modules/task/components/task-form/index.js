@@ -12,7 +12,7 @@ import styles from './task-form.module.scss';
 const sn = styleNames(styles);
 
 export const TaskForm = (props) => {
-  const {task, handleSubmit, isEditing = false} = props;
+  const { task, handleSubmit, isEditing = false } = props;
 
   const navigate = useNavigate();
 

@@ -9,9 +9,12 @@ import { createTask } from 'app/modules/task/store';
 const AddTask = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = useCallback((values) => {
-    dispatch(createTask(values));
-  }, []);
+  const handleSubmit = useCallback(
+    (values) => {
+      dispatch(createTask(values));
+    },
+    []
+  );
 
   return (
     <Box>

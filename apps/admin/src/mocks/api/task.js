@@ -82,7 +82,6 @@ export function taskRoutes() {
     }
 
     const id = request.params.id;
-    const attrs = this.normalizedRequestAttrs();
-    return schema.tasks.find(id).update(attrs);
+    return schema.tasks.find(id).update(JSON.parse(request.requestBody));
   });
 }

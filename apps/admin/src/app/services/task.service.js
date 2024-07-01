@@ -13,6 +13,11 @@ class TaskService {
 
   async getTaskById(taskId) {
     const response = await axios.get(`/api/task/${taskId}`);
+    return response.data.taskId;
+  }
+
+  async updateTask(taskId, updatedTask) {
+    const response = await axios.put(`/api/task/${taskId}`, updatedTask);
     return response.data.task;
   }
 }

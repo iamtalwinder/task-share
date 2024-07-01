@@ -107,13 +107,13 @@ export const taskSlice = createAppSlice({
           state.updateTaskStatus = APIStatusEnum.FAILED;
         }
       }
-    ),
+    )
   }),
   selectors: {
     selectListStatus: (state) => state.listStatus,
     selectTasks: (state) => state.tasks,
     selectCreateTaskStatus: (state) => state.createTaskStatus,
-    selectUpdateTaskStatus: (state) => state.updateTaskStatus,
+    selectUpdateTaskStatus: (state) => state.updateTaskStatus
   }
 });
 

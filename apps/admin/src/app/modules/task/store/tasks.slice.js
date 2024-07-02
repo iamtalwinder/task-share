@@ -20,8 +20,7 @@ export const taskSlice = createAppSlice({
     createTask: create.asyncThunk(
       async (task, { rejectWithValue }) => {
         try {
-          const newTask = await taskService.createTask(task);
-          return newTask;
+          return taskService.createTask(task);
         } catch (error) {
           return rejectWithValue('Failed to add new task');
         }
@@ -42,8 +41,7 @@ export const taskSlice = createAppSlice({
     getTask: create.asyncThunk(
       async (taskId, { rejectWithValue }) => {
         try {
-          const getTask = await taskService.getTaskById(taskId);
-          return getTask;
+          return taskService.getTaskById(taskId);
         } catch (error) {
           return rejectWithValue('Failed to update the task');
         }
@@ -63,8 +61,7 @@ export const taskSlice = createAppSlice({
     getUserTasks: create.asyncThunk(
       async (_, { rejectWithValue }) => {
         try {
-          const tasks = await taskService.getTasks();
-          return tasks;
+          return taskService.getTasks();
         } catch (error) {
           rejectWithValue('Failed to load the users');
         }
@@ -86,8 +83,7 @@ export const taskSlice = createAppSlice({
     updateTask: create.asyncThunk(
       async ({ taskId, updatedTask }, { rejectWithValue }) => {
         try {
-          const updated = await taskService.updateTask(taskId, updatedTask);
-          return updated;
+          return taskService.updateTask(taskId, updatedTask);
         } catch (error) {
           return rejectWithValue('Failed to update the task');
         }
@@ -112,8 +108,7 @@ export const taskSlice = createAppSlice({
     viewTask: create.asyncThunk(
       async (taskId, { rejectWithValue }) => {
         try {
-          const task = await taskService.getTaskById(taskId);
-          return task;
+          return taskService.getTaskById(taskId);
         } catch (error) {
           return rejectWithValue('Failed to view the task');
         }

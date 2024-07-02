@@ -38,7 +38,7 @@ const MainRoutes = {
       element: <EditTask />
     },
     {
-      path: '/task/:id/view',
+      path: '/task/:taskId/view',
       element: <ViewTask />
     },
     {

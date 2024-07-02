@@ -13,7 +13,7 @@ class TaskService {
 
   async getTaskById(taskId) {
     const response = await axios.get(`/api/task/${taskId}`);
-    return response.data.taskId;
+    return response.data.task;
   }
 
   async updateTask(taskId, updatedTask) {

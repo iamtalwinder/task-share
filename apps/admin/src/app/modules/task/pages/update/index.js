@@ -22,14 +22,20 @@ const UpdateTask = () => {
     });
   }, [dispatch, taskId, tasks]);
 
-  const handleSubmit = useCallback(
-    (values) => {
-      dispatch(updateTask({ taskId, updatedTask: values }));
-    },
-    [dispatch, taskId]
-  );
 
-  return <Box>{task ? <TaskForm task={task} handleSubmit={handleSubmit} isEditing={true} /> : <div>Loading task details...</div>}</Box>;
+  const handleSubmit = useCallback((values) => {
+    dispatch(updateTask({ taskId, updatedTask: values }));
+  }, [dispatch, taskId]);
+
+  return (
+    <Box>
+      {task ? (
+        <TaskForm task={task} handleSubmit={handleSubmit} isEditing={true} />
+      ) : (
+        <div>Loading task details...</div>
+      )}
+    </Box>
+  );
 };
 
 export default withErrorBoundary(UpdateTask);

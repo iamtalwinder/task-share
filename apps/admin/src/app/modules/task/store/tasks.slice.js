@@ -43,10 +43,7 @@ export const taskSlice = createAppSlice({
       async (taskId, { rejectWithValue }) => {
         try {
           const getTask = await taskService.getTaskById(taskId);
-          return getTask
-
-
-            ;
+          return getTask;
         } catch (error) {
           return rejectWithValue('Failed to update the task');
         }
@@ -147,8 +144,7 @@ export const taskSlice = createAppSlice({
 
 export const { setTasks, getUserTasks, createTask, getTask, updateTask, viewTask } = taskSlice.actions;
 
-export const { selectListStatus, selectTasks,
-  selectCreateTaskStatus, selectUpdateTaskStatus,
-  selectViewTaskStatus, selectSelectedTask } = taskSlice.selectors;
+export const { selectListStatus, selectTasks, selectCreateTaskStatus, selectUpdateTaskStatus, selectViewTaskStatus, selectSelectedTask } =
+  taskSlice.selectors;
 
 export default taskSlice.reducer;

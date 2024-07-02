@@ -13,7 +13,7 @@ const AddTask = () => {
     (values) => {
       dispatch(createTask(values));
     },
-    []
+    [dispatch]
   );
 
   return (

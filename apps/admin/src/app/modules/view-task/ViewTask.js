@@ -41,9 +41,8 @@ const ViewTask = () => {
             <Box>
               <Typography className={sn('content__title')}>Technologies Used</Typography>
               <Box className={sn('content__task-tags')}>
-                {selectedTask.tags && selectedTask.tags.map((tag, index) => (
-                  <Chip key={index} label={tag} className={sn('content__task-tags-used')} />
-                ))}
+                {selectedTask.tags &&
+                  selectedTask.tags.map((tag, index) => <Chip key={index} label={tag} className={sn('content__task-tags-used')} />)}
               </Box>
             </Box>
             <Divider className={sn('content__divider')} />

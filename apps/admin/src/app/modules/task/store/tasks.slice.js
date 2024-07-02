@@ -6,7 +6,8 @@ const initialState = {
   tasks: [],
   listStatus: APIStatusEnum.IDLE,
   createTaskStatus: APIStatusEnum.IDLE,
-  updateTaskStatus: APIStatusEnum.IDLE
+  updateTaskStatus: APIStatusEnum.IDLE,
+  viewTaskStatus: APIStatusEnum.IDLE
 };
 
 export const taskSlice = createAppSlice({
@@ -19,8 +20,7 @@ export const taskSlice = createAppSlice({
     createTask: create.asyncThunk(
       async (task, { rejectWithValue }) => {
         try {
-          const newTask = await taskService.createTask(task);
-          return newTask;
+          return taskService.createTask(task);
         } catch (error) {
           return rejectWithValue('Failed to add new task');
         }
@@ -41,8 +41,7 @@ export const taskSlice = createAppSlice({
     getTask: create.asyncThunk(
       async (taskId, { rejectWithValue }) => {
         try {
-          const updatedTask = await taskService.getTaskById(taskId);
-          return updatedTask;
+          return taskService.getTaskById(taskId);
         } catch (error) {
           return rejectWithValue('Failed to update the task');
         }
@@ -62,8 +61,7 @@ export const taskSlice = createAppSlice({
     getUserTasks: create.asyncThunk(
       async (_, { rejectWithValue }) => {
         try {
-          const tasks = await taskService.getTasks();
-          return tasks;
+          return taskService.getTasks();
         } catch (error) {
           rejectWithValue('Failed to load the users');
         }
@@ -85,8 +83,7 @@ export const taskSlice = createAppSlice({
     updateTask: create.asyncThunk(
       async ({ taskId, updatedTask }, { rejectWithValue }) => {
         try {
-          const updated = await taskService.updateTask(taskId, updatedTask);
-          return updated;
+          return taskService.updateTask(taskId, updatedTask);
         } catch (error) {
           return rejectWithValue('Failed to update the task');
         }
@@ -107,17 +104,42 @@ export const taskSlice = createAppSlice({
           state.updateTaskStatus = APIStatusEnum.FAILED;
         }
       }
+    ),
+    viewTask: create.asyncThunk(
+      async (taskId, { rejectWithValue }) => {
+        try {
+          return taskService.getTaskById(taskId);
+        } catch (error) {
+          return rejectWithValue('Failed to view the task');
+        }
+      },
+      {
+        pending: (state) => {
+          state.viewTaskStatus = APIStatusEnum.LOADING;
+        },
+        fulfilled: (state, action) => {
+          state.viewTaskStatus = APIStatusEnum.SUCCESS;
+          state.selectedTask = action.payload;
+        },
+        rejected: (state) => {
+          state.viewTaskStatus = APIStatusEnum.FAILED;
+        }
+      }
     )
   }),
   selectors: {
     selectListStatus: (state) => state.listStatus,
     selectTasks: (state) => state.tasks,
     selectCreateTaskStatus: (state) => state.createTaskStatus,
-    selectUpdateTaskStatus: (state) => state.updateTaskStatus
+    selectUpdateTaskStatus: (state) => state.updateTaskStatus,
+    selectViewTaskStatus: (state) => state.viewTaskStatus,
+    selectSelectedTask: (state) => state.selectedTask
   }
 });
 
-export const { setTasks, getUserTasks, createTask, getTask, updateTask } = taskSlice.actions;
-export const { selectListStatus, selectTasks, selectCreateTaskStatus, selectUpdateTaskStatus } = taskSlice.selectors;
+export const { setTasks, getUserTasks, createTask, getTask, updateTask, viewTask } = taskSlice.actions;
+
+export const { selectListStatus, selectTasks, selectCreateTaskStatus, selectUpdateTaskStatus, selectViewTaskStatus, selectSelectedTask } =
+  taskSlice.selectors;
 
 export default taskSlice.reducer;

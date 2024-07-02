@@ -8,6 +8,7 @@ import { MuiChipsInput } from 'mui-chips-input';
 import MarkdownEditor from 'app/ui-component/text-editor/TextEditor';
 import { styleNames } from 'libs/style-names';
 import styles from './task-form.module.scss';
+import PropTypes from 'prop-types';
 
 const sn = styleNames(styles);
 
@@ -102,4 +103,10 @@ export const TaskForm = (props) => {
       </Card>
     </Box>
   );
+};
+
+TaskForm.propTypes = {
+  task: PropTypes.object,
+  handleSubmit: PropTypes.func,
+  isEditing: PropTypes.bool
 };

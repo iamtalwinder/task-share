@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { styleNames } from 'libs/style-names';
 import styles from './MarkdownEditor.module.scss';
+import PropTypes from 'prop-types';
 
 const sn = styleNames(styles);
 
@@ -38,6 +39,12 @@ const MarkdownEditor = ({ value, onChange, name }) => {
       </div>
     </div>
   );
+};
+
+MarkdownEditor.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  name: PropTypes.string
 };
 
 export default MarkdownEditor;

@@ -20,6 +20,10 @@ class TaskService {
     const response = await axios.put(`/api/task/${taskId}`, updatedTask);
     return response.data.task;
   }
+
+  async deleteTask(taskId) {
+    await axios.delete(`/api/task/${taskId}`);
+  }
 }
 
 export const taskService = new TaskService();

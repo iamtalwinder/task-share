@@ -28,7 +28,7 @@ import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './task-list.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTasks, selectTasks } from '../../store/tasks.slice';
+import { deleteTask, getUserTasks, selectTasks } from '../../store/tasks.slice';
 
 const sn = styleNames(styles);
 
@@ -68,6 +68,10 @@ const TaskList = () => {
   const handleViewTask = (data) => {
     navigate(`/task/${data.id}/view`);
   };
+
+  const handleDeleteTask = (data) => {
+    dispatch(deleteTask(data.id))
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -110,7 +114,7 @@ const TaskList = () => {
                   <Button className={sn('table__action-button')} onClick={() => handleViewTask(row)}>
                     <RemoveRedEyeIcon />
                   </Button>
-                  <Button className={sn('table__action-button')}>
+                  <Button className={sn('table__action-button')} onClick={() => handleDeleteTask(row)}>
                     <DeleteIcon />
                   </Button>
                   <Button className={sn('table__action-button')} onClick={handleClick}>

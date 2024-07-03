@@ -84,4 +84,48 @@ export function taskRoutes() {
     const id = request.params.id;
     return schema.tasks.find(id).update(JSON.parse(request.requestBody));
   });
+
+  this.delete('/task/:id', function (schema, request) {
+    const payload = JwtService.validateRequest(request);
+  
+    if (!payload) {
+      return new Response(
+        401,
+        {},
+        {
+          errors: {
+            type: 'unauthorized',
+            message: 'Invalid token'
+          }
+        }
+      );
+    }
+  
+    const id = request.params.id;
+    const task = schema.tasks.find(id);
+  
+    if (!task) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: {
+            type: 'not-found',
+            message: `Task with ID ${id} not found`
+          }
+        }
+      );
+    }
+  
+    task.destroy();
+  
+    return new Response(
+      200,
+      {},
+      {
+        message: `Task with ID ${id} has been deleted successfully`
+      }
+    );
+  });
+  
 }

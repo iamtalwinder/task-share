@@ -29,12 +29,16 @@ import styles from './task-list.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTask, getUserTasks, selectTasks } from '../../store/tasks.slice';
+import SnackBar from 'app/ui-component/snackbar/snackbar';
 
 const sn = styleNames(styles);
 
 const TaskList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
   const navigate = useNavigate();
 
   const tasks = useSelector(selectTasks);
@@ -69,9 +73,24 @@ const TaskList = () => {
     navigate(`/task/${data.id}/view`);
   };
 
-  const handleDeleteTask = (data) => {
-    dispatch(deleteTask(data.id))
-  }
+  const handleDeleteTask = async (data) => {
+    const resultAction = await dispatch(deleteTask(data.id));
+    if (deleteTask.fulfilled.match(resultAction)) {
+      setSnackbarMessage('Task deleted successfully!');
+      setSnackbarSeverity('success');
+    } else {
+      setSnackbarMessage('Failed to delete the task.');
+      setSnackbarSeverity('error');
+    }
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -149,6 +168,13 @@ const TaskList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <SnackBar
+        open={snackbarOpen}
+        message={snackbarMessage}
+        severity={snackbarSeverity}
+        handleClose={handleSnackbarClose}
+      />
     </Box>
   );
 };

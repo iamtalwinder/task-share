@@ -4,7 +4,7 @@ import Loadable from 'app/ui-component/Loadable';
 
 const TaskDefault = Loadable(lazy(() => import('app/modules/task/pages/list')));
 const AddTask = Loadable(lazy(() => import('app/modules/task/pages/add')));
-const ViewTask = Loadable(lazy(() => import('app/modules/task/pages/view-task/ViewTask')));
+const ViewTask = Loadable(lazy(() => import('app/modules/task/pages/view')));
 const TestList = Loadable(lazy(() => import('app/modules/tests/pages/list')));
 const AddTest = Loadable(lazy(() => import('app/modules/tests/pages/add')));
 const EditTask = Loadable(lazy(() => import('app/modules/task/pages/update')));

@@ -29,16 +29,14 @@ import styles from './task-list.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTask, getUserTasks, selectTasks } from '../../store/tasks.slice';
-import SnackBar from 'app/ui-component/snackbar/snackbar';
+import CustomNotification from 'app/ui-component/snackbar/customNotification';
+import { showMessage } from 'app/ui-component/snackbar/notificationSlice.slice';
 
 const sn = styleNames(styles);
 
 const TaskList = () => {
   const [isGenerateLink, setIsGenerateLink] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-  const [snackbarMessage, setSnackbarMessage] = React.useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
   const navigate = useNavigate();
 
   const tasks = useSelector(selectTasks);
@@ -74,22 +72,25 @@ const TaskList = () => {
   };
 
   const handleDeleteTask = async (data) => {
-    const resultAction = await dispatch(deleteTask(data.id));
-    if (deleteTask.fulfilled.match(resultAction)) {
-      setSnackbarMessage('Task deleted successfully!');
-      setSnackbarSeverity('success');
-    } else {
-      setSnackbarMessage('Failed to delete the task.');
-      setSnackbarSeverity('error');
+    try {
+      const resultAction = dispatch(deleteTask(data.id));
+      dispatch(
+        showMessage({
+          message: 'Task deleted successfully!',
+          duration: 3000,
+          severity: 'success',
+        })
+      );
+      return resultAction;
+    } catch (error) {
+      dispatch(
+        showMessage({
+          message: 'An error occurred while trying to delete the task.',
+          duration: 3000,
+          severity: 'error',
+        })
+      );
     }
-    setSnackbarOpen(true);
-  };
-
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
   };
 
   const open = Boolean(anchorEl);
@@ -169,12 +170,7 @@ const TaskList = () => {
         </Table>
       </TableContainer>
 
-      <SnackBar
-        open={snackbarOpen}
-        message={snackbarMessage}
-        severity={snackbarSeverity}
-        handleClose={handleSnackbarClose}
-      />
+      <CustomNotification />
     </Box>
   );
 };

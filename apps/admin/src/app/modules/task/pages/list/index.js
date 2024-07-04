@@ -28,7 +28,9 @@ import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './task-list.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTasks, selectTasks } from '../../store/tasks.slice';
+import { deleteTask, getUserTasks, selectTasks } from '../../store/tasks.slice';
+import CustomNotification from 'app/ui-component/snackbar/customNotification';
+import { showMessage } from 'app/ui-component/snackbar/notificationSlice.slice';
 
 const sn = styleNames(styles);
 
@@ -67,6 +69,28 @@ const TaskList = () => {
 
   const handleViewTask = (data) => {
     navigate(`/task/${data.id}/view`);
+  };
+
+  const handleDeleteTask = async (data) => {
+    try {
+      const resultAction = dispatch(deleteTask(data.id));
+      dispatch(
+        showMessage({
+          message: 'Task deleted successfully!',
+          duration: 3000,
+          severity: 'success',
+        })
+      );
+      return resultAction;
+    } catch (error) {
+      dispatch(
+        showMessage({
+          message: 'An error occurred while trying to delete the task.',
+          duration: 3000,
+          severity: 'error',
+        })
+      );
+    }
   };
 
   const open = Boolean(anchorEl);
@@ -110,7 +134,7 @@ const TaskList = () => {
                   <Button className={sn('table__action-button')} onClick={() => handleViewTask(row)}>
                     <RemoveRedEyeIcon />
                   </Button>
-                  <Button className={sn('table__action-button')}>
+                  <Button className={sn('table__action-button')} onClick={() => handleDeleteTask(row)}>
                     <DeleteIcon />
                   </Button>
                   <Button className={sn('table__action-button')} onClick={handleClick}>
@@ -145,6 +169,8 @@ const TaskList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <CustomNotification />
     </Box>
   );
 };

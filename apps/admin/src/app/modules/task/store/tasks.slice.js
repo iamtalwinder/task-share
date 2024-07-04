@@ -6,8 +6,7 @@ const initialState = {
   tasks: [],
   listStatus: APIStatusEnum.IDLE,
   createTaskStatus: APIStatusEnum.IDLE,
-  updateTaskStatus: APIStatusEnum.IDLE,
-  viewTaskStatus: APIStatusEnum.IDLE
+  viewTaskStatus: APIStatusEnum.IDLE,
 };
 
 export const taskSlice = createAppSlice({
@@ -43,7 +42,7 @@ export const taskSlice = createAppSlice({
         try {
           return taskService.getTaskById(taskId);
         } catch (error) {
-          return rejectWithValue('Failed to update the task');
+          return rejectWithValue('Failed to get the task');
         }
       },
       {
@@ -79,7 +78,6 @@ export const taskSlice = createAppSlice({
         }
       }
     ),
-
     updateTask: create.asyncThunk(
       async ({ taskId, updatedTask }, { rejectWithValue }) => {
         try {
@@ -89,19 +87,12 @@ export const taskSlice = createAppSlice({
         }
       },
       {
-        pending: (state) => {
-          state.updateTaskStatus = APIStatusEnum.LOADING;
-        },
         fulfilled: (state, action) => {
-          state.updateTaskStatus = APIStatusEnum.SUCCESS;
           const index = state.tasks.findIndex((task) => task.id === action.payload.id);
 
           if (index !== -1) {
             state.tasks[index] = action.payload;
           }
-        },
-        rejected: (state) => {
-          state.updateTaskStatus = APIStatusEnum.FAILED;
         }
       }
     ),
@@ -125,6 +116,21 @@ export const taskSlice = createAppSlice({
           state.viewTaskStatus = APIStatusEnum.FAILED;
         }
       }
+    ),
+    deleteTask: create.asyncThunk(
+      async (taskId, { rejectWithValue }) => {
+        try {
+          await taskService.deleteTask(taskId);
+          return taskId;
+        } catch (error) {
+          return rejectWithValue('Failed to delete the task');
+        }
+      },
+      {
+        fulfilled: (state, action) => {
+          state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+        },
+      }
     )
   }),
   selectors: {
@@ -137,9 +143,9 @@ export const taskSlice = createAppSlice({
   }
 });
 
-export const { setTasks, getUserTasks, createTask, getTask, updateTask, viewTask } = taskSlice.actions;
+export const { setTasks, getUserTasks, createTask, getTask, updateTask, viewTask, deleteTask } = taskSlice.actions;
 
-export const { selectListStatus, selectTasks, selectCreateTaskStatus, selectUpdateTaskStatus, selectViewTaskStatus, selectSelectedTask } =
-  taskSlice.selectors;
+export const { selectListStatus, selectTasks, selectCreateTaskStatus,
+  selectUpdateTaskStatus, selectViewTaskStatus, selectSelectedTask } = taskSlice.selectors;
 
 export default taskSlice.reducer;

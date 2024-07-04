@@ -25,7 +25,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
 
-import styles from './TestsList.module.scss';
+import styles from './test-list.module.scss';
 
 const sn = styleNames(styles);
 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { viewTask, selectSelectedTask, selectViewTaskStatus } from 'app/modules/task/store'; // Updated imports
 import { styleNames } from 'libs/style-names';
 import { withErrorBoundary } from 'libs/error-boundary';
-import styles from './ViewTask.module.scss';
+import styles from './view-task.module.scss';
 
 const sn = styleNames(styles);
 

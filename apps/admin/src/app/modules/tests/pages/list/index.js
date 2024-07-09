@@ -105,11 +105,11 @@ const TestsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tests.map((test) => (
+            {tests?.map((test) => (
               <TableRow key={test.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{test.title}</TableCell>
                 <TableCell align="center">
-                  {test.tasks.map(task => (
+                  {test.tasks?.map(task => (
                     <Chip key={task.taskId} label={task.name} className={sn('table__chip')} />
                   ))}
                 </TableCell>

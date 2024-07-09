@@ -26,7 +26,6 @@ export const TestForm = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       handleSubmit(values);
       navigate('/tests');
     }

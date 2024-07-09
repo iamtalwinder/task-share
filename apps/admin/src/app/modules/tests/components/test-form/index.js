@@ -3,31 +3,31 @@ import { Button, Grid, Card, Box, CardContent, Typography, TextField } from '@mu
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useParams } from 'react-router-dom';
 import MultipleTaskSelect from 'app/ui-component/select-task/SelectTask';
 import { styleNames } from 'libs/style-names';
-import { withErrorBoundary } from 'libs/error-boundary';
 import styles from './test-form.module.scss';
+import PropTypes from 'prop-types';
 
 const sn = styleNames(styles);
 
-const TestForm = () => {
+export const TestForm = (props) => {
+  const { test, handleSubmit, isEditing = false } = props;
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
-    task: yup.array().min(1, 'At least one task is required')
+    tasks: yup.array().min(1, 'At least one task is required')
   });
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      task: []
+      title: test?.title || '',
+      tasks: test?.tasks || []
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      handleSubmit(values);
+      navigate('/tests');
     }
   });
 
@@ -35,29 +35,20 @@ const TestForm = () => {
     navigate('/tests');
   };
 
-  React.useEffect(() => {
-    if (id) {
-      formik.setValues({
-        title: 'Todo List',
-        task: ['Create todo list', '', 'Snackbar with mui']
-      });
-    }
-  }, [id, formik]);
-
   return (
     <Box>
       <Card>
         <CardContent>
           <Box className={sn('new-test')}>
             <Typography variant="h5" component="div" className={sn('new-test__title')}>
-              {id ? 'Edit Test' : 'Add New test'}
+              {isEditing ? 'Update' : 'Create'}
             </Typography>
             <Box>
               <Button variant="contained" color="error" onClick={handleCancel} className={sn('new-test__cancel-btn')}>
                 Cancel
               </Button>
               <Button variant="contained" onClick={formik.handleSubmit} className={sn('new-test__add-btn')}>
-                {id ? 'Edit Test' : 'Add New Test'}
+                {isEditing ? 'Update' : 'Create'}
               </Button>
             </Box>
           </Box>
@@ -82,7 +73,12 @@ const TestForm = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <MultipleTaskSelect />
+                <MultipleTaskSelect
+                  name='tasks'
+                  value={formik.values.tasks}
+                  onChange={formik.setFieldValue}
+                />
+                {formik.touched.tasks && formik.errors.tasks && <Typography color="error">{formik.errors.tasks}</Typography>}
               </Grid>
             </Grid>
           </form>
@@ -92,4 +88,8 @@ const TestForm = () => {
   );
 };
 
-export default withErrorBoundary(TestForm);
+TestForm.propTypes = {
+  test: PropTypes.object,
+  handleSubmit: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool
+};

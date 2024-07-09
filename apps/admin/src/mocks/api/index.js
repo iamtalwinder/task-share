@@ -1,9 +1,10 @@
 import { createServer, Model } from 'miragejs';
-import { users, userTasks } from '../data';
+import { users, userTasks, tests } from '../data';
 
 import { authRoutes } from './auth';
 import { userRoutes } from './user';
 import { taskRoutes } from './task';
+import { testRoutes } from './test';
 
 export function makeServer({ environment = 'development' } = {}) {
   let server = createServer({
@@ -11,7 +12,8 @@ export function makeServer({ environment = 'development' } = {}) {
 
     models: {
       user: Model,
-      task: Model
+      task: Model,
+      test: Model
     },
 
     seeds(server) {
@@ -22,6 +24,10 @@ export function makeServer({ environment = 'development' } = {}) {
       userTasks.forEach((task) => {
         server.create('task', task);
       });
+
+      tests.forEach((test) => {
+        server.create('test', test);
+      })
     },
 
     routes() {
@@ -30,6 +36,7 @@ export function makeServer({ environment = 'development' } = {}) {
       authRoutes.call(this);
       userRoutes.call(this);
       taskRoutes.call(this);
+      testRoutes.call(this);
     }
   });
 
